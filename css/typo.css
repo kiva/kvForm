@@ -1,0 +1,110 @@
+/*
+  Chai Typography
+
+  font-sizes:
+  10px (.7143em) - your text should NOT get any smaller than this
+  11px (.7857em) -
+  12px (.8571em) -
+  13px (.9286em) - side module header
+  14px - default sizing
+  15px (1.0714em) -
+  16px (1.1429em) - form header ( legend ), form label
+  17px (1.2143em)
+  18px (1.2857em)
+  19px (1.3552em)
+  20px (1.4286em) - section header
+  22px (1.5714em) - footer section headers li
+  24px (1.7142em)
+  30px (2.1429em) - lightbox header
+  33px (2.3571em) - page header
+  36px (2.5714em) - promo headers
+  44px (3.1429em) - section headers on landing pages
+  48px (3.4286em) - section headers on landing pages
+
+  font-family: 'Proxima Nova Light', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 200;
+  font-family: 'Proxima Nova Regular', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 400;
+  font-family: 'Proxima Nova Semibold', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-weight: 600;
+
+  font-family: 'Museo Slab 300', Rockwell, Georgia, serif; font-weight: 300;
+  font-family: 'Museo Slab 500', Rockwell, Georgia, serif; font-weight: 500;
+*/
+
+body 	{ font: .875em/1.357 arial, helvetica, sans-serif; }
+h1, h2, h3, h4  { line-height: 1; }
+
+h3, section > h1, section > header h1   { font-family:'Proxima Nova Regular', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size: 1.4286em; font-size-adjust:0.488; font-weight: 400; }
+aside > h1, aside > header h1, aside h3, aside section h1
+, .number_caption { font-family:'Proxima Nova Regular', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size: 1em; font-size-adjust:0.488; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; }
+aside section:first-child header { margin-top: 0; }
+article h1 { font-family:'Proxima Nova Regular', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size: 1.7857em; font-size-adjust:0.488; font-weight: 400; }
+aside article h1  { font-size: 1em; }
+h4, section > h2  { }
+h5, section > h3  { font-size: 1em;}
+
+pre, code, samp, output { font-family:Consolas, "Lucida Console", "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier; }
+p       { margin-bottom: 20px; }
+
+figcaption { font-size: .8571em; }
+
+/* General and Utility Styles */
+.big      { font-size: 1.2857em; }
+.bigger   { font-size: 1.4286em; }
+.biggest  { font-size: 1.5714em; }
+.small    { font-size: .9286em;}
+.smaller  { font-size: .7857em;}
+.smallest { font-size: .7143em;}
+
+button, .button, ui-button   { font-family:'Proxima Nova Regular', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight: 400; }
+.number    { font-family:"Museo Slab 500", Rockwell, Georgia, serif; font-weight:500; }
+.number_sans    { font-family:'Proxima Nova Semibold', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight: 600; }
+
+
+/* featureText and introText are the same thing with different semantic meaning */
+.featureText, .introText  { font-family:'Proxima Nova Regular', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight: 400; font-size: 1.4286em; line-height: 1.35em; }
+.featureText.bold, .featureText .bold {'Proxima Nova Semibold', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-weight: 600;}
+
+.textBanner	{font-family:'Proxima Nova Regular', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-weight: 400; font-size: 1.2143em; line-height: 1.2857em; }
+
+/* The Frame */
+#utilLinks    { font-family:'Proxima Nova Semibold', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size: .8571em; font-weight:600; letter-spacing: 0.09em; text-transform: uppercase; }
+#utilLinks li.greeting  { text-transform: none; }
+#utilLinks li.freeTrialMsg  { font-family:arial, helvetica, sans-serif; text-transform: none;font-weight: 200; }
+#utilLinks li.freeTrialMsg span.def { font-family: 'Proxima Nova Regular', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 400; }
+#basketCount  { font-size: .917em; }
+
+.siteNav li { font-family:'Proxima Nova Light', 'Helvetica Neue', Arial, Helvetica, sans-serif;  font-size: 1.929em; font-size-adjust:0.488; font-weight:200; }
+.skinnyHeader .homeLink			{ font-size: .8571em; }
+.skinnyHeader .primaryNav li a	{ font-family:'Proxima Nova Light', 'Helvetica Neue', Arial, Helvetica, sans-serif;  font-size: 1.2857em; font-size-adjust:0.488; font-weight:200; }
+
+.pageHeader h2, h2.pageHeader      { font-family:'Museo Slab 500', Rockwell, Georgia, serif; font-weight:500; font-size: 2.357em; }
+.pageHeader h2 span { font-family:'Museo Slab 300', Rockwell, Georgia, serif; font-weight:300; font-size: 2.357em; }
+.pageHeader h3, h3.pageHeader      { font-family:'Museo Slab 300', Rockwell, Georgia, serif; font-weight:300; font-size: 1.786em; }
+
+#secondaryNav   { font-family:'Proxima Nova Light', 'Helvetica Neue', Arial, Helvetica, sans-serif;  font-size: 1.5em; font-size-adjust:0.488; font-weight:200; }
+#secondaryNav ul li li        { font: .722em arial, helvetica, sans-serif; }
+
+#topSecondaryNav  			{ font-family:'Proxima Nova Light', 'Helvetica Neue', Arial, Helvetica, sans-serif;  font-size: 1.2858em; font-size-adjust:0.488; font-weight:200; }
+#topSecondaryNav .dropdownIcon ul	{ font: .722em arial, helvetica, sans-serif; }
+
+/* Footer */
+.footerLinks li li h3 { font-family:'Proxima Nova Light', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size: 1.5714em; font-size-adjust:0.488; font-weight:200; font-style:normal }
+.siteFooter .legalDisclaimer  { font-size: .7857em; font-style: italic; }
+.siteFooter .slogan     { font-family:"Museo Slab 500", Rockwell, Georgia, serif; font-weight:500; font-size: 1.1429em; }
+.siteFooter .copyright  { font-size: .8571em; }
+
+#featuredUpdates .updateType    { font: 1em arial, helvetica, sans-serif; }
+
+/* includes and partials */
+.lenderCards li .info         { font-size: .857em; }
+.teamCards li .info           { font-size: .857em; }
+.teamCards.expanded li .info  { font-size: 1em; }
+.teamCards.expanded .name { font-family:'Proxima Nova Regular', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size: 1.4286em; font-size-adjust:0.488; font-weight: 400; }
+
+/* Lightbox */
+#jqmWrapper > h1
+,#jqmWrapper > section h1
+, #jqmWrapper > h3
+, #jqmWrapper > hgroup h3
+, #jqmWrapper .hLightbox { font-family:'Proxima Nova Regular', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight: 400; font-size: 1.5714em; }
+
+#jqmWrapper > h2 { font-family:'Proxima Nova Regular', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size-adjust:0.488; font-weight: 400; font-size: 1.2858em; margin-bottom: 0.5em; }

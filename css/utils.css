@@ -1,0 +1,115 @@
+/* Utility Classes */
+
+.fL     { float: left; }
+.fR     { float: right; }
+.cB     { clear: both; }
+.cL     { clear: left; }
+.cR     { clear: right; }
+.dN     { display: none; }
+.dB     { display: block; }
+.dI     { display: inline; }
+.dIB    { display: inline-block; }
+.vH     { visibility: hidden; }
+.vV     { visibility: visible; }
+.oH     { overflow: hidden; }
+
+.center { margin-left: auto; margin-right: auto; }
+.stretch{ width: 100%; }  
+.taC    { text-align: center; }
+.taL    { text-align: left; }
+.taR    { text-align: right; }
+.taJ    { text-align: justify; }
+
+.bT     { border-top: #ccc 1px solid; }
+.bR     { border-right: #ccc 1px solid; }
+.bB     { border-bottom: #ccc 1px solid; }
+.bL     { border-left: #ccc 1px solid; }
+
+.b      { padding-bottom: 25px; border: #ccc 1px solid; }
+.b.noPB,
+.noPB	{ padding-bottom: 0; }
+.b.noPT,
+.noPT	{ padding-top: 0;}
+
+
+.p, .pB { padding-bottom: 25px; }
+.pT     { padding-top: 25px; }
+.pTB    { padding-top: 25px; padding-bottom: 25px; }
+
+.mT		{ margin-top: 25px; }
+.mB		{ margin-bottom: 25px; }
+.mTB	{ margin-top: 25px;  margin-bottom: 25px;}
+.mL		{ margin-left: 25px; }
+.mR		{ margin-right: 25px; }
+.noMT	{ margin-top: 0 !important; }
+.noMB	{ margin-bottom: 0; }
+.mL10 { margin-left: 10px; }
+.mR10 { margin-right: 10px; }
+.mT10 { margin-top: 10px; }
+.mB10 { margin-bottom: 10px; }
+.mTB10 { margin-top: 10px; margin-bottom: 10px; }
+.mT50 { margin-top: 50px; }
+
+.bS  { -moz-box-shadow: 1px 1px 4px #ccc;  -webkit-box-shadow: 1px 1px 4px #ccc;  box-shadow: 1px 1px 4px #ccc; }
+.rC  { -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px;}
+
+.vaT {vertical-align: top;}
+.vaM {vertical-align: middle;}
+.vaB {vertical-align: bottom;}
+
+.rCT {
+	-moz-border-radius-topright: 10px;
+	-moz-border-radius-topleft: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+.rCB {
+	-moz-border-radius-bottomright: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+.rCL {
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 0;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 0;
+}
+.rCR {
+	-moz-border-radius-topright: 10px;
+	-moz-border-radius-bottomright: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 10px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 10px;
+}
+
+.cols {
+	-moz-column-width: 270px;
+	-webkit-column-width: 270px;
+	-moz-column-gap: 20px;
+	-webkit-column-gap: 20px;
+}
+
+.underline  { text-decoration: underline; }
+.italic     { font-style: italic; }
+.bold       { font-weight: bold; }
+
+.lh125		{line-height: 125%;}
+.lh150		{line-height: 150%;}
+.lh175		{line-height: 175%;}
+.lh200		{line-height: 200%;}
+
+/* Clearfix method, Use as a last resort after trying float, overflow, and inline-block methods */
+.b:before,
+.b:after,
+.cF:before,
+.cF:after { content: "."; display: block; height: 0; overflow: hidden; visibility: hidden;}
+.b:after,
+.cF:after { clear: both; }

@@ -1,0 +1,18 @@
+.kvForm input[type="radio"],
+.kvForm input[type="checkbox"] { margin: 0; }
+
+.kvForm .set,
+.kvForm .cSet { position: relative; }
+.kvForm input[type="radio"] + label,
+
+.kvForm input[type="radio"],
+.kvForm input[type="checkbox"] { opacity: 0; position: absolute; top: 5px; left: 5px; width: 18px; }
+
+/* @todo @uglymunky form.customCheckbox input[type="radio"] + label, */
+.kvForm input[type="checkbox"] + label          { background: url(../img/sprite/checkbox.png) no-repeat 4px -12px; clear: none; cursor: pointer; display: inline-block; margin: 0; }
+.kvForm input[type="checkbox"] + label:hover    { background-position: 4px -46px; }
+
+/* @todo @uglymunky form.customCheckbox input[type="radio"]:checked + label     { background-position: 10px -80px; } */
+.kvForm input[type="checkbox"]:checked + label  { background-position: 4px -80px; }
+
+.kvForm input.massToggler.someChecked + label   { background-position: 4px -114px; }

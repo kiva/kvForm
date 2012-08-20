@@ -1,0 +1,168 @@
+body	{ background-color: #f7f7f2; color: #333; }
+a					{ color: #197099; }
+a.light				{ color: #479db6; } 	/* added by JE at Abe's request, used on dark backgrounds */
+h1, h2, h3, h4  	{ color: #4b9123; }
+
+.figL figcaption, .figR figcaption  { background-color: #f1efed; }
+
+meter::-webkit-meter-horizontal-optimum-value,
+meter::-webkit-meter-horizontal-suboptimal-value,
+meter::-webkit-meter-horizontal-even-less-good-value { background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#AD7), color-stop(0.2, #CEA), color-stop(0.45, #7A3), color-stop(0.55, #7A3), to(#AD7)); }
+
+.wrap{
+	background-image: -moz-linear-gradient(top, #f7f7f2, #c2e5a2);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f7f7f2), color-stop(1, #c2e5a2));
+	background-image: linear-gradient(top, #f7f7f2, #c2e5a2);
+	background-repeat: no-repeat;
+	background-position: bottom;
+	-moz-background-size: 100% 320px;
+	background-size: 100% 320px	;
+}
+
+.odd        { background-color: #f1efed; }
+.b          { background-color: #fff; }
+
+.notice             { border-color: #f25343; }
+.notice, .hilite    { background-color: #ffee90; }
+.error              { color: #f25343; }
+.warning, .alert    { color: #ae0000; border-color: #ae0000; }
+.disabled           { color: #888;}
+.soft               { color: #888; }
+
+.browserNotice    { background-color: #ffffe1; }
+.browserNoticeInternetExplorerSix  {background-color: #fbbfb9; }
+.noscriptWarning  { background-color: #ae0000; color: #fff; }
+
+/* Sitewide styles */
+a.help		{ border-color: #197099 }
+aside h4	{ color: #333; }
+
+
+.jqmOverlay         { background-color: #000; }
+
+.textButton { background-color: transparent; color: #197099; }
+
+/* Buttons */
+button, .button, ui-button {background-color: #f1efed; border-color: #74b446; color: #4b9123;}
+
+button, .button, ui-button {
+	background-image: -moz-linear-gradient(top, #ffffff, #e1e1e1);
+	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ffffff),color-stop(1, #e1e1e1));
+	background-image: linear-gradient(top, #ffffff, #e1e1e1);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#e1e1e1');
+}
+button:hover, .button:hover, button .ui-state-hover {
+  background-image: -moz-linear-gradient(top, #ffffff, #d0e2c6);
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ffffff),color-stop(1, #d0e2c6));
+  background-image: linear-gradient(top, #ffffff, #d0e2c6);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#d0e2c6');
+}
+button:active, .button:active {
+  background-image: -moz-linear-gradient(top, #d0e2c6, #ffffff);
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #d0e2c6),color-stop(1, #ffffff));
+  background-image: linear-gradient(top, #d0e2c6, #ffffff);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#d0e2c6', EndColorStr='#ffffff');
+}
+button.disabled, .button.disabled,
+button.disabled:hover, .button.disabled:hover,
+button.disabled:active, .button.disabled:active {
+	background-color: #ffffff; border-color: #aaaaaa; color: #aaaaaa;
+	background-image: -moz-linear-gradient(top, #ffffff, #e1e1e1);
+	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ffffff),color-stop(1, #e1e1e1));
+	background-image: linear-gradient(top, #ffffff, #e1e1e1);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#e1e1e1');
+}
+
+button.actNow, .button.actNow { background-color: #fa8205; border-top-color: #fab846; color: #fff;
+  background-image: -moz-linear-gradient(top, #f89f23, #fa8306);
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #f89f23),color-stop(1, #fa8306));
+  background-image: linear-gradient(top, #f89f23, #fa8306);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f89f23', EndColorStr='#fa8306');
+  -moz-box-shadow: 0 -1px 2px #fb8200;
+  -webkit-box-shadow: 0 -1px 2px #fb8200;
+  box-shadow: 0 -1px 2px #fb8200;
+}
+button.actNow:hover, .button.actNow:hover {
+  background-image: -moz-linear-gradient(top, #f9b128, #fa8105);
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #f9b128),color-stop(1, #fa8105));
+  background-image: linear-gradient(top, #f9b128, #fa8105);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f9b128', EndColorStr='#fa8105');
+}
+button.actNow:active, .button.actNow:active { border-top-color: #f5871c;
+  background-image: -moz-linear-gradient(top, #fa8306, #f89f23);
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #fa8306),color-stop(1, #f89f23));
+  background-image: linear-gradient(top, #fa8306, #f89f23);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fa8306', EndColorStr='#f89f23');
+}
+
+button.fbButton, .button.fbButton { background-color: #3b5998; border: none; border-top: #8fa4b4 1px solid; color: #fff; padding-left: 20px;
+	background: url(/img/sprite/social4.png) no-repeat 15px -110px, -moz-linear-gradient(top, #6985b5, #556ca3);
+	background: url(/img/sprite/social4.png) no-repeat 15px -110px, -webkit-gradient(linear,left top,left bottom,color-stop(0, #6985b5),color-stop(1, #556ca3));
+	background: url(/img/sprite/social4.png) no-repeat 15px -110px, linear-gradient(top, #6985b5, #556ca3);
+	-moz-box-shadow: 0 -1px 2px #29447e;
+	-webkit-box-shadow: 0 -1px 2px #29447e;
+	box-shadow: 0 -1px 2px #29447e;
+}
+button.fbButton:hover, .button.fbButton:hover {
+  background: url(/img/sprite/social4.png) no-repeat 15px -110px, -moz-linear-gradient(top, #7291bd, #485b97);
+  background: url(/img/sprite/social4.png) no-repeat 15px -110px, -webkit-gradient(linear,left top,left bottom,color-stop(0, #7291bd),color-stop(1, #485b97));
+  background: url(/img/sprite/social4.png) no-repeat 15px -110px, linear-gradient(top, #7291bd, #485b97);
+}
+button.fbButton:active, .button.fbButton:active { border-top-color: #6985b5;
+  background: url(/img/sprite/social4.png) no-repeat 15px -110px, -moz-linear-gradient(top, #485b97, #7291bd);
+  background: url(/img/sprite/social4.png) no-repeat 15px -110px, -webkit-gradient(linear,left top,left bottom,color-stop(0, #485b97),color-stop(1, #7291bd));
+  background: url(/img/sprite/social4.png) no-repeat 15px -110px, linear-gradient(top, #485b97, #7291bd);
+}
+
+.n-cssgradients button.fbButton, .n-cssgradients .button.fbButton { background: #3b5998 url(/img/sprite/social4.png) no-repeat 15px -107px; 	filter: 0; }
+
+.boxCap {
+  background-color: #74b446;
+  background-image: -moz-linear-gradient(top, #6BAB46, #5B9B36);
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #6BAB46),color-stop(1, #5B9B36));
+  background-image: linear-gradient(top, #6BAB46, #5B9B36);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#6BAB46', EndColorStr='#5B9B36');
+}
+
+.textBanner	{ color:#ffffff; background-color:#4b9123; }
+
+.number_caption	{ color: #aaa; }
+
+/* Tables */
+tr.odd td     { background-color: #f1efed; }
+
+/* Chai Frame */
+#utilLinks              { background-color: #f2f0ee; }
+#utilLinks  a           { color: #666; }
+#utilLinks li.freeTrialMsg span.def { color: #4b9123; }
+#utilLinks  li.freeTrialMsg a { color: #197099; }
+#utilLinks li.greeting  { background-color: #fff; }
+#utilLinks li.giftsLink a { color: #4b9123; }
+#utilLinks #basketCount { background-color: #74b446; color: #fff; }
+
+.siteHeader         { background-color: #fff; }
+
+.siteNav li a       { color: #000; }
+.siteNav li a:hover { color: #74b446; }
+.siteNav li.urHere a	{ color: #4b9123; }
+
+.skinnyHeader .primaryNav li a			{ color: #000; }
+.skinnyHeader .primaryNav li.active a
+, .skinnyHeader .primaryNav li a:hover	{ color: #4b9123; }
+
+#secondaryNav ul li a         { color: #333; }
+#secondaryNav ul li a:hover   { color: #4b9123; }
+#secondaryNav ul li.urHere a  { color: #4b9123; }
+
+#topSecondaryNav > ul > li.urHere
+, #topSecondaryNav > ul > li.urHere > a{ color: #4b9123; }
+#topSecondaryNav .dropdownIcon > ul > li > a:hover	{ color: #4b9123; }
+#topSecondaryNav .dropdownIcon > ul > li.urHere > div	{ color: #74b446; }
+
+.siteFooter{
+	/* Non-IE browsers have the footer gradient color set in .wrap to allow for overlap with content */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f7f7f2', EndColorStr='#c2e5a2');
+}
+.siteFooter a { color: #666; }
+.siteFooter .legalDisclaimer  { color: #666; }
+.footerText   { background-color: #74b446; color: #fff; }

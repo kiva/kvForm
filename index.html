@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+	<link rel="stylesheet" href="/css/reset.css" />
+	<link rel="stylesheet" href="/css/utils.css" />
+	<link rel="stylesheet" href="/css/chai.css" />
+	<link rel="stylesheet" href="/css/color.css" />
+	<link rel="stylesheet" href="/css/typo.css" />
+	<link rel="stylesheet" href="/css/style.css" />
+
+	<link rel="stylesheet" href="/js/kv.form/css/kv.form.css" />
+	<!-- <link rel="stylesheet" href="/js/kv.form-customCheckbox/css/kv.form-customCheckbox.css" /> -->
+	<title>Forms - Demo Page</title>
+	<script src="/lib/modernizr.js"></script>
+</head>
+<body>
+
+	<header>
+		<h1>Forms - Demo Page</h1>
+	</header>
+
+	<div class="main">
+
+		<div class="formWrapper">
+
+			<form class="kvForm fStack">
+
+				<div class="fSet">
+					<label>I1</label>
+					<input type="text" />
+				</div>
+
+				<div class="fSet">
+					<label>I2</label>
+					<div class="fSetInner">
+						<input type="text" />
+					</div>
+				</div>
+
+				<div class="fSet">
+					<label>I3</label>
+					<div class="fSetInner">
+						<input type="text" />
+					</div>
+				</div>
+
+				<div class="fSet">
+					<div class="fSet">
+						<label>Input 1</label>
+						<input type="text" />
+					</div>
+
+					<div class="fSet">
+						<label>Input 1</label>
+						<div class="fSetInner">
+							<input type="text" />
+						</div>
+					</div>
+
+					<div class="fSet">
+						<label>Input 2</label>
+						<div class="fSetInner">
+							<input type="text" />
+						</div>
+						<div class="fSetMsg">
+							<div>This message is for testing</div>
+						</div>
+					</div>
+
+					<div class="fSet">
+						<label>Input 2</label>
+						<div class="fSetInner">
+							<input type="text" />
+							</div>
+						<div class="fSetMsg">
+							<div>This message only shows when either js fails/is disabled or wrapped via js with a .fControl element</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="fSet">
+					<div class="fSetHead">Select one of the following checkboxes</div>
+
+					<div class="fSet">
+						<input type="checkbox" id="checkbox1" />
+						<label for="checkbox1">Label for checkbox 1</label>
+					</div>
+
+					<div class="fSet">
+						<input type="checkbox" id="checkbox2" />
+						<label for="checkbox2">Label for checkbox 2</label>
+					</div>
+
+					<div class="fSet">
+						<input type="checkbox" id="checkbox3" />
+						<label for="checkbox3">Label for checkbox 3</label>
+					</div>
+
+					<div class="fSet">
+						<input type="checkbox" id="checkbox4" />
+						<label for="checkbox4">Label for checkbox 4</label>
+					</div>
+				</div>
+
+				<div class="fSet">
+					<div class="fSet fSetHead">
+						<input type="checkbox" class="massToggler" />
+						<div class="fSetInner">
+							<label>Select one of the following checkboxes</label>
+						</div>
+					</div>
+
+					<div class="fSet">
+						<input type="checkbox"/>
+						<div class="fSetInner">
+							<label>LLLLabel for checkbox 1</label>
+						</div>
+					</div>
+
+					<div class="fSet">
+						<input type="checkbox"/>
+						<label>Label for checkbox 2</label>
+					</div>
+
+					<div class="fSet">
+						<input type="checkbox"/>
+						<label>Label for checkbox 3</label>
+					</div>
+
+					<div class="fSet">
+						<input type="checkbox"/>
+						<label>Label for checkbox 4</label>
+					</div>
+				</div>
+
+				<div class="fSet fNSet">
+					<div class="fSetHead">Header for an fSetHead</div>
+
+					<div class="fSet">
+						<label>Some label</label>
+						<input type="text" />
+						<input type="text" />
+					</div>
+				</div>
+
+				<div class="fSet fNSet">
+					<div class="fSet fSetHead">
+						<input type="checkbox" class="massToggler" />
+						<div class="fSetInner">
+							<label>Header for an fSetHead + fSet</label>
+						</div>
+						<div class="fSetMsg">
+							<div>Testing message in the header</div>
+						</div>
+					</div>
+
+					<div class="fSet fSliced">
+						<div class="fSet">
+							<input type="checkbox" id="checkbox6" />
+							<div class="fSetInner fSetInner2">
+								<label for="checkbox6">Label for checkbox 6</label>
+								<select>
+									<option>Select box</option>
+								</select>
+								<input type="text" />
+								<input type="text" />
+							</div>
+							<div class="fSetMsg">
+								<div>Message for a checkbox item 1</div>
+								<div>Message for a checkbox item 2</div>
+								<div>Message for a checkbox item 3</div>
+							</div>
+						</div>
+
+						<div class="fSet">
+							<input type="checkbox" id="checkbox7" />
+							<label for="checkbox7">Label for checkbox 7</label>
+						</div>
+
+						<div class="fSet">
+							<input type="checkbox" id="checkbox8" />
+							<label for="checkbox8">Label for checkbox 8</label>
+						</div>
+
+						<div class="fSet">
+							<div class="fSet">
+								<input type="checkbox" id="checkbox9" />
+								<label for="checkbox9">Label for checkbox 9</label>
+							</div>
+							<div class="fSet">
+								<div class="fSet">
+									<input type="checkbox" id="nestedCheckbox1" />
+									<label for="checkbox1">Label for nestedCheckbox 1</label>
+								</div>
+
+								<div class="fSet">
+									<input type="checkbox" id="nestedCheckbox2" />
+									<label for="checkbox2">Label for nestedCheckbox 2</label>
+								</div>
+
+								<div class="fSet">
+									<input type="checkbox" id="nestedCheckbox3" />
+									<label for="checkbox3">Label for nestedCheckbox 3</label>
+								</div>
+
+								<div class="fSet">
+									<input type="checkbox" id="nestedCheckbox4" />
+									<div class="fSetInner">
+										<label for="checkbox4">Label for nestedCheckbox 4</label>
+									</div>
+									<div class="fSetMsg">
+										<div>Message for a checkbox item 1</div>
+										<div>Message for a checkbox item 2</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+
+
+		</div>
+
+
+	</div>
+
+	<script src="/lib/jquery.js"></script>
+	<script src="/lib/kv.js"></script>
+	<script src="/js/kv.form/js/kv.form.js"></script>
+</body>
+</html>

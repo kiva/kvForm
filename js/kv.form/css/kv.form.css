@@ -1,0 +1,49 @@
+::-webkit-input-placeholder	{ color: #aaa; }
+:-moz-placeholder 			{ color: #aaa; }
+.placeholder				{ color: #aaa; }
+
+input[type="search"] { background: #fff url(/img/icon/search.png) no-repeat 10px center; border: #ccc 1px solid; -moz-border-radius: 50px; -webkit-border-radius: 50px; border-radius: 50px; padding: 5px 5px 5px 30px; }
+input[type="file"]:hover { cursor: pointer; }
+
+input[type="text"]
+, input[type="password"]
+, input[type="email"]
+, input[type="url"]
+, input[type="number"]
+, textarea { border: #ccc 1px solid; border-radius: 3px; padding: 5px; }
+
+/**
+* fSetMsg - The message only appears if one of the following is true:
+* 1) Javascript fails/disabled
+* 2) Javascript changes the display type
+*/
+.js .fSetMsg     { display: none; }
+
+.fStack .fSetHead   { margin-bottom: 15px; }
+.fStack .fSetInner  { display: inline-block; }
+.fStack .fSetMsg    { display: inline-block; }
+
+.fStack label { display: block; font-weight: bold; }
+.fStack input { display: inline-block; margin-right: 7px; }
+
+.fSet input[type="checkbox"],
+.fSet input[type="radio"]       { display: inline-block; margin-top: 4px; vertical-align: top; }
+
+.fSet input[type="checkbox"] + label,
+.fSet input[type="radio"] + label       { display: inline-block; }
+
+.fSet { clear: left; margin-bottom: 15px; position: relative; }
+.fSet > .fSet   { margin-left: 15px; }
+
+.fSet.fSetHead     { margin-left: 0; }
+
+.fSet:before,
+.fSet:after { content: "."; display: block; height: 0; overflow: hidden; visibility: hidden; }
+.fSet:after { clear: both; }
+
+.fCSet > .fSetInner label           { font-weight: normal; }
+
+.fSliced .fSet              { border-bottom: #ccc 1px solid; margin-bottom: 0px; padding: 8px 0; }
+.fSliced .fSet > .fSet:last-child   { border-bottom: 0; padding-bottom: 0; }
+.fSliced .fSet:first-child  { padding-top: 0; }
+.fSliced .fSetMsg           { color: #666; float: right; text-align: right; }
