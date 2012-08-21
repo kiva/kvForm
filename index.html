@@ -27,21 +27,17 @@
 
 				<div class="fSet">
 					<label>I1</label>
+					<input type="text" required/>
+				</div>
+
+				<div class="fSet valid">
+					<label>I2</label>
 					<input type="text" />
 				</div>
 
 				<div class="fSet">
-					<label>I2</label>
-					<div class="fSetInner">
-						<input type="text" />
-					</div>
-				</div>
-
-				<div class="fSet">
 					<label>I3</label>
-					<div class="fSetInner">
-						<input type="text" />
-					</div>
+					<input type="text" />
 				</div>
 
 				<div class="fSet">
@@ -52,16 +48,12 @@
 
 					<div class="fSet">
 						<label>Input 1</label>
-						<div class="fSetInner">
-							<input type="text" />
-						</div>
+						<input type="text" />
 					</div>
 
 					<div class="fSet">
 						<label>Input 2</label>
-						<div class="fSetInner">
-							<input type="text" />
-						</div>
+						<input type="text" />
 						<div class="fSetMsg">
 							<div>This message is for testing</div>
 						</div>
@@ -69,9 +61,7 @@
 
 					<div class="fSet">
 						<label>Input 2</label>
-						<div class="fSetInner">
-							<input type="text" />
-							</div>
+						<input type="text" />
 						<div class="fSetMsg">
 							<div>This message only shows when either js fails/is disabled or wrapped via js with a .fControl element</div>
 						</div>
@@ -105,16 +95,12 @@
 				<div class="fSet">
 					<div class="fSet fSetHead">
 						<input type="checkbox" class="massToggler" />
-						<div class="fSetInner">
-							<label>Select one of the following checkboxes</label>
-						</div>
+						<label>Select one of the following checkboxes</label>
 					</div>
 
 					<div class="fSet">
 						<input type="checkbox"/>
-						<div class="fSetInner">
-							<label>LLLLabel for checkbox 1</label>
-						</div>
+						<label>LLLLabel for checkbox 1</label>
 					</div>
 
 					<div class="fSet">
@@ -146,9 +132,7 @@
 				<div class="fSet fNSet">
 					<div class="fSet fSetHead">
 						<input type="checkbox" class="massToggler" />
-						<div class="fSetInner">
-							<label>Header for an fSetHead + fSet</label>
-						</div>
+						<label>Header for an fSetHead + fSet</label>
 						<div class="fSetMsg">
 							<div>Testing message in the header</div>
 						</div>
@@ -157,14 +141,12 @@
 					<div class="fSet fSliced">
 						<div class="fSet">
 							<input type="checkbox" id="checkbox6" />
-							<div class="fSetInner fSetInner2">
-								<label for="checkbox6">Label for checkbox 6</label>
-								<select>
-									<option>Select box</option>
-								</select>
-								<input type="text" />
-								<input type="text" />
-							</div>
+							<label for="checkbox6">Label for checkbox 6</label>
+							<select>
+								<option>Select box</option>
+							</select>
+							<input type="text" />
+							<input type="text" />
 							<div class="fSetMsg">
 								<div>Message for a checkbox item 1</div>
 								<div>Message for a checkbox item 2</div>
@@ -205,9 +187,7 @@
 
 								<div class="fSet">
 									<input type="checkbox" id="nestedCheckbox4" />
-									<div class="fSetInner">
-										<label for="checkbox4">Label for nestedCheckbox 4</label>
-									</div>
+									<label for="checkbox4">Label for nestedCheckbox 4</label>
 									<div class="fSetMsg">
 										<div>Message for a checkbox item 1</div>
 										<div>Message for a checkbox item 2</div>
@@ -217,15 +197,75 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="fSet fSliced">
+					<div class="fSet">
+						<input type="radio" name="a" />
+						<label>Label for radio 1</label>
+						<div class="fSetMsg">
+							<div>testing testing</div>
+						</div>
+					</div>
+
+					<div class="fSet">
+						<input type="checkbox" />
+						<label>Label for nestedCheckbox 4</label>
+						<div class="fSetMsg">
+							<div>Message for a checkbox item 1</div>
+							<div>Message for a checkbox item 2</div>
+						</div>
+					</div>
+
+					<div class="fSet">
+						<input type="radio" name="a" />
+						<label>Label for radio 2</label>
+					</div>
+
+					<div class="fSet">
+						<input type="radio" name="a" />
+						<label>Label for radio 3</label>
+					</div>
+				</div>
+
+				<div class="fSet fSetGroup">
+					<div class="fSetHead">Grouped inputs</div>
+					<div class="fSet">
+						<label>first name</label>
+						<input type="text">
+					</div>
+
+					<div class="fSet">
+						<label>last name</label>
+						<input type="text">
+					</div>
+				</div>
+
+				<div class="fSet fSetGroup">
+					<div class="fSetHead">Grouped inputs</div>
+					<div class="fSet">
+						<label>first name</label>
+						<input type="text">
+					</div>
+
+					<div class="fSet">
+						<label>last name</label>
+						<input type="text">
+					</div>
+
+					<div class="fSetMsg">
+						<div>This is my group message</div>
+						<div>This is my group message</div>
+						<div>This is my group message</div>
+					</div>
+				</div>
 			</form>
-
-
 		</div>
 
 
 	</div>
 
 	<script src="/lib/jquery.js"></script>
+	<script src="/lib/jquery.h5validate.js"></script>
 	<script src="/lib/kv.js"></script>
 	<script src="/js/kv.form/js/kv.form.js"></script>
 </body>
