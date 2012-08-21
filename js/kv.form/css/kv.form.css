@@ -12,38 +12,32 @@ input[type="text"]
 , input[type="number"]
 , textarea { border: #ccc 1px solid; border-radius: 3px; padding: 5px; }
 
-/**
-* fSetMsg - The message only appears if one of the following is true:
-* 1) Javascript fails/disabled
-* 2) Javascript changes the display type
-*/
+/* If js is enabled, hide the form and force js to display it */
 .js .kvForm     { visiblity: hidden; }
 
 .fStack label { display: block; font-weight: bold; }
 .fStack input { display: inline-block; margin-right: 7px; }
 
-.fStack .fSetHead   { margin-bottom: 15px; }
+.fStack .fSetHead   { margin-bottom: 15px; margin-left: 0; }
 .fStack .fSetInner  { display: inline-block; }
 .fStack .fSetMsg    { display: inline-block; }
 
-.fSet input[type="checkbox"],
-.fSet input[type="radio"]       { display: inline-block; vertical-align: text-top; }
-.fSet input[type="checkbox"]    { margin-top: 3px; }
-.fSet input[type="radio"]       { margin-top: 2px; }
+.fStack .fSet { clear: left; margin-bottom: 15px; position: relative; }
+.fStack .fSet > .fSet               { margin-left: 15px; }
+.fStack .fSet > .fSet:last-child    { margin-bottom: 0; }
 
-.fSet input[type="checkbox"] + label,
-.fSet input[type="radio"] + label       { display: inline-block; }
+.fStack .fSet input[type="checkbox"],
+.fStack .fSet input[type="radio"]       { display: inline-block; vertical-align: text-top; }
+.fStack .fSet input[type="checkbox"]    { margin-top: 3px; }
+.fStack .fSet input[type="radio"]       { margin-top: 2px; }
 
-.fSet { clear: left; margin-bottom: 15px; position: relative; }
-.fSet > .fSet               { margin-left: 15px; }
-.fSet > .fSet:last-child    { margin-bottom: 0; }
+.fStack .fSet input[type="checkbox"] + label,
+.fStack .fSet input[type="radio"] + label       { display: inline-block; }
 
-.fStack .fSetMsg                        { color: #666; }
-.fStack.failedSubmit .fSetMsg.error     { color: #c00; }
-.fStack .fSet.required > label:after    { color: #888; content: "\A0*"; position: absolute; }
-.fStack .fSet.valid > label:after       { color: #74b446;  content: "\A0 \2713"; position: absolute; }
-
-.fSet.fSetHead     { margin-left: 0; }
+.fSetMsg                        { color: #666; }
+.failedSubmit .fSetMsg.error    { color: #c00; }
+.fSet.required > label:after    { color: #888; content: "\A0*"; position: absolute; }
+.fSet.valid > label:after       { color: #74b446;  content: "\A0 \2713"; position: absolute; }
 
 .fSet:before,
 .fSet:after { content: "."; display: block; height: 0; overflow: hidden; visibility: hidden; }
