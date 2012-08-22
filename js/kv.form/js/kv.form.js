@@ -1,26 +1,23 @@
-
-
-
-
-
-
 (function () {
 	'use strict';
 
+
 	// use this to wrap the inner (not including the first element)
 	var $fSetInner = $('<div class="fSetInner" />')
+	, $fSetToggler = $('<a href="#" class="fSetToggler">advanced</a>')
 	, _ajaxForm = $.fn.ajaxForm;
+
 
 	delete $.fn.ajaxForm;
 
 
 	/**
-	 * Checks/unchecks all checkboxes that correspond to a given "massToggler"
+	 * Checks/unchecks all checkboxes that correspond to a given "fSetToggler"
 	 *
-	 * @param {jQuery} $massToggler
+	 * @param {jQuery} $fSetToggler
 	 * @param {jQuery} $checkboxes
 	 */
-	function checkMassToggler ($massToggler, $checkboxes) {
+	function checkfSetToggler ($fSetToggler, $checkboxes) {
 		var checkedCounter = 0;
 
 		$checkboxes.each(function () {
@@ -30,11 +27,11 @@
 		});
 
 		if (checkedCounter === 0) {
-			$massToggler.prop('checked', false).change().removeClass('someChecked');
+			$fSetToggler.prop('checked', false).change().removeClass('someChecked');
 		} else if ($checkboxes.length === checkedCounter) {
-			$massToggler.prop('checked', true).change().removeClass('someChecked');
+			$fSetToggler.prop('checked', true).change().removeClass('someChecked');
 		} else {
-			$massToggler.prop('checked', true).change().addClass('someChecked');
+			$fSetToggler.prop('checked', true).change().addClass('someChecked');
 		}
 	}
 
@@ -63,7 +60,6 @@
 		});
 		$nestedSet.removeClass(openClass);
 	}
-
 
 
 	/**
@@ -100,38 +96,32 @@
 		}
 	}
 
-	// Loop through and set up each "expandable set".
+
+	/**
+	 * Set up each "expandable set"
+	 *
+	 * @param index
+	 * @param el
+	 */
 	function setUpExpandableSet(index, el) {
-		var $displayToggler = $('<a href="#" class="displayToggler">advanced</a>')
-		, $massToggler = $('.massToggler', this).first()
-		, $checkboxes = $('> ul li input[type="checkbox"]', this);
+		var $expandableSet = $(el);
 
-		// Set up the display toggler
-		$displayToggler.click(function (e) {
-			e.preventDefault();
+		$fSetToggler.click(function (event) {
+			event.preventDefault();
 
-			toggleNestedSet({displayToggler: $displayToggler, nestedSet: $nestedSet});
+			toggleExpandableSet({$fSetToggler: $fSetToggler, $expandableSet: $expandableSet});
 		});
 
-		// Set up the mass toggler, check or uncheck all related checkboxes
-		if ($checkboxes.length) {
-			$massToggler.click(function () {
-				$checkboxes.prop('checked', this.checked).change();
-			});
-		}
-
-		// Add the "displayToggler" to the DOM
-		$('> .nSetHead label', this).after($displayToggler);
-
-		$checkboxes.change(function () {
-			checkMassToggler($massToggler, $checkboxes);
-		});
-
-		checkMassToggler($massToggler, $checkboxes);
+		$('.fSetHead .fSetInner', $expandableSet).append($fSetToggler);
 	}
 
 
-	// Wraps all non-first select, input, textarea, and label child elements of an fSet with an .fSetInner
+	/**
+	 * Wraps all non-first select, input, textarea, and label child elements of an fSet with an .fSetInner element
+	 *
+	 * @param index
+	 * @param el
+	 */
 	function innerWrap(index, el) {
 		var $children = $(el).children('select, input, textarea, label')
 		, $firstEl = $children.first()
@@ -188,6 +178,13 @@
 	}
 
 
+	/**
+	 *
+	 *
+	 * @param $targetForm
+	 * @param options
+	 * @return {KvForm}
+	 */
 	function kvForm($targetForm, options) {
 		var kvForm = $.data($targetForm[0], 'kv-form');
 

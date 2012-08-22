@@ -51,4 +51,4 @@ input[type="text"]
 .fSliced .fSet:first-child  { padding-top: 0; }
 .fSliced .fSetMsg           { float: right; text-align: right; }
 
-.fSetGroup > .fSet      { display: inline-block; margin-bottom: 0; margin-left: 0; }
+.fStack .fSetGroup > .fSet      { display: inline-block; margin-bottom: 0; margin-left: 0; }
