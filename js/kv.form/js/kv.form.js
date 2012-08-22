@@ -4,11 +4,7 @@
 
 	// use this to wrap the inner (not including the first element)
 	var $fSetInner = $('<div class="fSetInner" />')
-	, $fSetToggler = $('<a href="#" class="fSetToggler">advanced</a>')
-	, _ajaxForm = $.fn.ajaxForm;
-
-
-	delete $.fn.ajaxForm;
+	, $fSetToggler = $('<a href="#" class="fSetToggler">advanced</a>');
 
 
 	/**
@@ -140,6 +136,7 @@
 
 	function KvForm($targetForm, options) {
 		$targetForm = $($targetForm).css('display', 'block');
+		options = options || {};
 
 		var $elements = $('input, select, textarea', $targetForm)
 		, $clickableElements = $('input[type="checkbox"], input[type="radio"]', $targetForm)
@@ -161,10 +158,10 @@
 		$expandableSets.each(setUpExpandableSet);
 
 		if (typeof $.fn.ajaxForm == 'function') {
-			_ajaxForm.call($targetForm, options);
+			$targetForm.ajaxForm(options);
 		}
 
-		if (typeof kv.formValidation  == 'function' && options.validate) {
+		if (typeof kv.formValidation  == 'function' && options.validation) {
 			formValidationObj = kv.formValidation(options.validation);
 
 			if (formValidationObj) {
@@ -179,7 +176,8 @@
 
 
 	/**
-	 *
+	 * @todo Need to revisit how we handle the caching of objects on a form element's data attribute
+	 * Currently kv.jqueryExtend does it for us, but we want it to also work when someone calls it via kv.form as well
 	 *
 	 * @param $targetForm
 	 * @param options
@@ -192,7 +190,10 @@
 			return kvForm;
 		}
 
-		return new KvForm($targetForm, options)
+		kvForm = new KvForm($targetForm, options);
+		$.data($targetForm[0], 'kv-form', kvForm);
+
+		return kvForm;
 	}
 
 	kv.extend({form: kvForm});

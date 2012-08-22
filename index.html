@@ -258,6 +258,10 @@
 						<div>This is my group message</div>
 					</div>
 				</div>
+
+				<div class="fSet">
+					<input type="submit" value="click me" />
+				</div>
 			</form>
 		</div>
 
@@ -272,7 +276,12 @@
 	<!-- <script src="/js/kv.form-h5shim/js/kv.form-h5shim.js"></script> -->
 
 	<script>
-		kv.form($('.kvForm'));
+		kv.form($('.kvForm')
+			, {
+				beforeSubmit: function () { console.log('hi');}
+				, data: { key1: 'value1', key2: 'value2' }
+			}
+		);
 	</script>
 </body>
 </html>
