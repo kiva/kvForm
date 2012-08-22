@@ -1,0 +1,11 @@
+load:
+  - ../../../lib/jasmine.js
+  - ../../../lib/JasmineAdapter.js
+
+  - ../../../lib/jquery.js
+
+  - ../../../lib/kv.js
+  - ../js/kv.form.js
+
+test:
+  - spec/kv.form.js
