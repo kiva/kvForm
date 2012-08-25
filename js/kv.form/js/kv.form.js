@@ -2,114 +2,15 @@
 	'use strict';
 
 
-	// use this to wrap the inner (not including the first element)
 	var $fSetInner = $('<div class="fSetInner" />')
-	, $fSetToggler = $('<a href="#" class="fSetToggler">advanced</a>');
 
+	, $fSetToggler = $('<a href="#" class="fSetToggler">advanced</a>')
 
-	/**
-	 * Checks/unchecks all checkboxes that correspond to a given "fSetToggler"
-	 *
-	 * @param {jQuery} $fSetToggler
-	 * @param {jQuery} $checkboxes
-	 */
-	function checkfSetToggler ($fSetToggler, $checkboxes) {
-		var checkedCounter = 0;
+	, openClass = 'open'
 
-		$checkboxes.each(function () {
-			if (this.checked) {
-				checkedCounter++;
-			}
-		});
+	, openText = 'close'
 
-		if (checkedCounter === 0) {
-			$fSetToggler.prop('checked', false).change().removeClass('someChecked');
-		} else if ($checkboxes.length === checkedCounter) {
-			$fSetToggler.prop('checked', true).change().removeClass('someChecked');
-		} else {
-			$fSetToggler.prop('checked', true).change().addClass('someChecked');
-		}
-	}
-
-
-	/**
-	 * @param {jQuery} $nestedSet
-	 * @param {jQuery} $nestedFields
-	 * @param {jQuery} $displayToggler
-	 */
-	function showNestedSet ($nestedSet, $nestedFields, $displayToggler) {
-		$nestedFields.stop().slideDown(function () {
-			$displayToggler.text($displayToggler.text().replace('advanced', 'close'));
-		});
-		$nestedSet.addClass(openClass);
-	}
-
-
-	/**
-	 * @param {jQuery} $nestedSet
-	 * @param {jQuery} $nestedFields
-	 * @param {jQuery} $displayToggler
-	 */
-	function hideNestedSet ($nestedSet, $nestedFields, $displayToggler) {
-		$nestedFields.stop().slideUp(function () {
-			$displayToggler.text($displayToggler.text().replace('close', 'advanced'));
-		});
-		$nestedSet.removeClass(openClass);
-	}
-
-
-	/**
-	 *
-	 * @param {Object} options - You MUST either pass the nestedSet or the targetSet property
-	 * nestedSet
-	 * targetSet
-	 * displayToggler [optional]
-	 */
-	function toggleExpandableSet(options) {
-		var $nestedSet
-		, $targetSet
-		, $nestedFields
-		, $displayToggler;
-
-		if (options.nestedSet) {
-			$nestedSet = $(options.nestedSet);
-			$nestedFields = $('> .nSetHead + *', $nestedSet);
-		} else if (options.targetSet) {
-			$targetSet = $(options.targetSet);
-			$nestedFields = $targetSet.parent();
-			$nestedSet = $nestedFields.closest('.nSet');
-		}
-
-		// Save a reference to the display toggler
-		$displayToggler = options.displayToggler
-			? $(options.displayToggler)
-			: $('.displayToggler', $nestedSet);
-
-		if ($nestedSet.hasClass(openClass)) {
-			hideNestedSet($nestedSet, $nestedFields, $displayToggler);
-		} else {
-			showNestedSet($nestedSet, $nestedFields, $displayToggler);
-		}
-	}
-
-
-	/**
-	 * Set up each "expandable set"
-	 *
-	 * @param index
-	 * @param el
-	 */
-	function setUpExpandableSet(index, el) {
-		var $expandableSet = $(el);
-
-		$fSetToggler.click(function (event) {
-			event.preventDefault();
-
-			toggleExpandableSet({$fSetToggler: $fSetToggler, $expandableSet: $expandableSet});
-		});
-
-		$('.fSetHead .fSetInner', $expandableSet).append($fSetToggler);
-	}
+	, closedText = 'advanced';
 
 
 	/**
@@ -134,6 +35,13 @@
 	}
 
 
+	/**
+	 *
+	 * @param $targetForm
+	 * @param options
+	 * @return {Object}
+	 * @constructor
+	 */
 	function KvForm($targetForm, options) {
 		$targetForm = $($targetForm).css('display', 'block');
 		options = options || {};
@@ -155,7 +63,10 @@
 		$clickableElements.closest('.fSet').addClass('clickableSet');
 
 		// Set expandable fSets
-		$expandableSets.each(setUpExpandableSet);
+		$expandableSets.each(function () {
+			new ExpandableSet(options, this);
+		});
+
 
 		if (typeof $.fn.ajaxForm == 'function') {
 			$targetForm.ajaxForm(options);
@@ -176,27 +87,104 @@
 
 
 	/**
-	 * @todo Need to revisit how we handle the caching of objects on a form element's data attribute
-	 * Currently kv.jqueryExtend does it for us, but we want it to also work when someone calls it via kv.form as well
 	 *
-	 * @param $targetForm
-	 * @param options
-	 * @return {KvForm}
+	 * @param event
+	 * @context {ExpandableSet}
 	 */
-	function kvForm($targetForm, options) {
-		var kvForm = $.data($targetForm[0], 'kv-form');
-
-		if (kvForm) {
-			return kvForm;
-		}
-
-		kvForm = new KvForm($targetForm, options);
-		$.data($targetForm[0], 'kv-form', kvForm);
-
-		return kvForm;
+	function handleToggleClick(event) {
+		this.toggle($(event.target));
 	}
 
-	kv.extend({form: kvForm});
+
+	/**
+	 *
+	 * @param $expandableSet
+	 * @constructor
+	 */
+	function ExpandableSet(options, expandableSet) {
+		var $expandableSet = this.$expandableSet = $(expandableSet);
+		this.$toggler = $fSetToggler.appendTo($('.fSetHead .fSetInner', $expandableSet));
+		this.$nestedSet = $('> .fSetHead + .fSet', $expandableSet);
+		this.$checkboxes = $('SELECTOR', $expandableSet);
+		this.state = 'closed';
+		this.settings = options;
+
+		$expandableSet.click($.proxy(this, 'handleToggleClick'));
+	}
+
+
+	/**
+	 * Triggers the click event on the expandableSet
+	 */
+	ExpandableSet.prototype.click = function () {
+	};
+
+
+	/**
+	 * Toggles the display of the expandableSet
+	 */
+	ExpandableSet.prototype.toggle = function () {
+		if (this.state == 'expanded') {
+			this.expand();
+		} else {
+			this.close();
+		}
+	};
+
+
+	/**
+	 * Expands the expandableSet
+	 */
+	ExpandableSet.prototype.expand = function () {
+		var self = this;
+
+		self.$nestedSet.stop().slideDown(function () {
+			self.$toggler.text(closedText);
+			self.state = 'expanded';
+			$(this).addClass(openClass);
+		})
+
+
+	};
+
+
+	/**
+	 * Closes the expandableSet
+	 */
+	ExpandableSet.prototype.close = function () {
+		var self = this;
+
+		self.$nestedSet.stop().slideUp(function () {
+			self.$toggler.text(openText);
+			self.state = 'closed';
+			$(this).removeClass(openClass);
+		})
+	};
+
+
+	kv.extend({
+		/**
+		 * @todo Need to revisit how we handle the caching of objects on a form element's data attribute
+		 * Currently kv.jqueryExtend does it for us, but we want it to also work when someone calls it via kv.form as well
+		 *
+		 * @param $targetForm
+		 * @param options
+		 * @return {KvForm}
+		 */
+		form: function ($targetForm, options) {
+			var kvForm = $.data($targetForm[0], 'kv-form');
+
+			if (kvForm) {
+				return kvForm;
+			}
+
+			kvForm = new KvForm($targetForm, options);
+			$.data($targetForm[0], 'kv-form', kvForm);
+
+			return kvForm;
+		}
+	});
+
 	$.fn.kvForm = kv.jqueryExtend('form');
 }());
 
