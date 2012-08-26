@@ -2,15 +2,7 @@
 	'use strict';
 
 
-	var $fSetInner = $('<div class="fSetInner" />')
-
-	, $fSetToggler = $('<a href="#" class="fSetToggler">advanced</a>')
-
-	, openClass = 'open'
-
-	, openText = 'close'
-
-	, closedText = 'advanced';
+	var $fSetInner = $('<div class="fSetInner" />');
 
 
 	/**
@@ -51,6 +43,7 @@
 		, $requiredElements = $('[required]', $targetForm)
 		, $sets = $('.fSet', $targetForm)
 		, $expandableSets = $('.expandableSet', $targetForm)
+		, $clickableSets
 		, formValidationObj;
 
 		// Wrap inner elements
@@ -59,14 +52,23 @@
 		// Set required fSet
 		$requiredElements.closest('.fSet').addClass('required');
 
-		// Set clickable fSet
-		$clickableElements.closest('.fSet').addClass('clickableSet');
-
 		// Set expandable fSets
-		$expandableSets.each(function () {
-			new ExpandableSet(options, this);
-		});
+		if (typeof kv.ExpandableSet == 'function') {
+			$expandableSets.each(function () {
+				new kv.ExpandableSet(options, this);
+			});
+		}
 
+		// Set clickable fSet
+		$clickableSets = $clickableElements
+			.closest('.fSet')
+			.addClass('clickableSet');
+
+		if (typeof kv.ClickableSet == 'function') {
+			$clickableSets.each(function () {
+				new kv.ClickableSet(options, this);
+			});
+		}
 
 		if (typeof $.fn.ajaxForm == 'function') {
 			$targetForm.ajaxForm(options);
@@ -84,82 +86,6 @@
 			settings: options
 		}
 	}
-
-
-	/**
-	 *
-	 * @param event
-	 * @context {ExpandableSet}
-	 */
-	function handleToggleClick(event) {
-		this.toggle($(event.target));
-	}
-
-
-	/**
-	 *
-	 * @param $expandableSet
-	 * @constructor
-	 */
-	function ExpandableSet(options, expandableSet) {
-		var $expandableSet = this.$expandableSet = $(expandableSet);
-		this.$toggler = $fSetToggler.appendTo($('.fSetHead .fSetInner', $expandableSet));
-		this.$nestedSet = $('> .fSetHead + .fSet', $expandableSet);
-		this.$checkboxes = $('SELECTOR', $expandableSet);
-		this.state = 'closed';
-		this.settings = options;
-
-		$expandableSet.click($.proxy(this, 'handleToggleClick'));
-	}
-
-
-	/**
-	 * Triggers the click event on the expandableSet
-	 */
-	ExpandableSet.prototype.click = function () {
-	};
-
-
-	/**
-	 * Toggles the display of the expandableSet
-	 */
-	ExpandableSet.prototype.toggle = function () {
-		if (this.state == 'expanded') {
-			this.expand();
-		} else {
-			this.close();
-		}
-	};
-
-
-	/**
-	 * Expands the expandableSet
-	 */
-	ExpandableSet.prototype.expand = function () {
-		var self = this;
-
-		self.$nestedSet.stop().slideDown(function () {
-			self.$toggler.text(closedText);
-			self.state = 'expanded';
-			$(this).addClass(openClass);
-		})
-
-
-	};
-
-
-	/**
-	 * Closes the expandableSet
-	 */
-	ExpandableSet.prototype.close = function () {
-		var self = this;
-
-		self.$nestedSet.stop().slideUp(function () {
-			self.$toggler.text(openText);
-			self.state = 'closed';
-			$(this).removeClass(openClass);
-		})
-	};
 
 
 	kv.extend({
