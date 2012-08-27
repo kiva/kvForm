@@ -16,15 +16,23 @@
 
 	/**
 	 *
-	 * @param $expandableSet
+	 * @param options
+	 * @param expandableSet
 	 * @constructor
 	 */
-	function ExpandableSet(options, expandableSet) {
+	function ExpandableSet(expandableSet, options) {
+		var self = this;
+
 		this.settings = $.extend({}, ExpandableSet.defaults, options);
 		this.$expandableSet = $(expandableSet);
 		this.$toggler = $fSetToggler.appendTo($('.fSetHead .fSetInner', this.$expandableSet));
 		this.$nestedSet = $('> .fSetHead + .fSet', this.$expandableSet);
-		this.settings = options;
+
+		$.each(['$expandableSet', '$toggler', '$nestedSet'], function (index, value) {
+			if (self[value].length === 0) {
+				throw 'missing ' + value;
+			}
+		});
 
 		if (this.settings.expandOnLoad) {
 			this.expand();
@@ -38,7 +46,7 @@
 
 	ExpandableSet.defaults = {
 		openClass: 'open'
-		, openText: 'close'
+		, expandedText: 'close'
 		, closedText: 'advanced'
 		, expandOnLoad: false
 	};
@@ -63,7 +71,7 @@
 		var self = this;
 
 		self.$nestedSet.stop().slideDown(function () {
-			self.$toggler.text(self.settings.openText);
+			self.$toggler.text(self.settings.expandedText);
 			self.state = 'expanded';
 			$(this).addClass(self.settings.openClass);
 		});
