@@ -15,6 +15,7 @@
 
 
 	/**
+	 * Creates a new instance of ExpandableSet
 	 *
 	 * @param options
 	 * @param expandableSet
@@ -44,6 +45,11 @@
 	}
 
 
+	/**
+	 * Default settings
+	 *
+	 * @type {Object}
+	 */
 	ExpandableSet.defaults = {
 		openClass: 'open'
 		, expandedText: 'close'
@@ -92,5 +98,6 @@
 	};
 
 
+	// Expose on the kv namespace
 	kv.extend({ExpandableSet: ExpandableSet});
 }(jQuery, kv));
