@@ -1,0 +1,12 @@
+load:
+  - ../../../lib/jasmine.js
+  - ../../../lib/JasmineAdapter.js
+
+  - ../../../lib/jquery.js
+
+  - ../../../lib/kv.js
+  - ../../kv.form/js/kv.form.js
+  - ../js/kv.ClickableSet.js
+
+test:
+  - spec/kv.ClickableSet.js

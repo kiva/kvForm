@@ -1,0 +1,6 @@
+.kvForm .clickableSet > .fSetInner label    { font-weight: normal; }
+
+.fSetHead.clickableSet ~ .fSet              { border-bottom: #ccc 1px solid; padding: 8px 0; margin-bottom: 0; }
+.fSetHead.clickableSet ~ .fSet:last-child   { border-bottom: 0; padding-bottom: 0; }
+.fSetHead.clickableSet ~ .fSet:first-child  { padding-top: 0; }
+.fSetHead.clickableSet ~ .fSetMsg           { float: right; text-align: right; }
