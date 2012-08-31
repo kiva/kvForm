@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<link rel="stylesheet" type="text/css" href="../../../css/jasmine.css">
+
+	<title>Jasmine Spec Runner</title>
+
+	<!-- jasmine files -->
+	<script src="../../../lib/jasmine.js"></script>
+	<script src="../../../lib/jasmine-html.js"></script>
+
+	<!-- dependencies -->
+	<script src="../../../lib/jquery.js"></script>
+
+	<!-- source files -->
+	<script src="../../../lib/kv.js"></script>
+	<script src="../../kv.form/js/kv.form.js"></script>
+	<script src="../js/kv.NestedCheckboxSet.js"></script>
+
+	<!-- spec files -->
+	<script type="text/javascript" src="spec/kv.NestedCheckboxSet.js"></script>
+</head>
+
+<body>
+
+	<!-- Run Jasmine -->
+	<script>
+		(function() {
+			var jasmineEnv = jasmine.getEnv()
+			, htmlReporter = new jasmine.HtmlReporter();
+
+			jasmineEnv.updateInterval = 1000;
+			jasmineEnv.addReporter(htmlReporter);
+			jasmineEnv.specFilter = function(spec) {
+				return htmlReporter.specFilter(spec);
+			};
+
+			jasmineEnv.execute();
+		}());
+	</script>
+</body>
+</html>

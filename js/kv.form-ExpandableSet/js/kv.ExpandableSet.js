@@ -26,7 +26,7 @@
 
 		this.settings = $.extend({}, ExpandableSet.defaults, options);
 		this.$expandableSet = $(expandableSet);
-		this.$toggler = $fSetToggler.appendTo($('.fSetHead .fSetInner', this.$expandableSet));
+		this.$toggler = $fSetToggler.clone().appendTo($('.fSetHead .fSetInner', this.$expandableSet));
 		this.$nestedSet = $('> .fSetHead + .fSet', this.$expandableSet);
 
 		$.each(['$expandableSet', '$toggler', '$nestedSet'], function (index, value) {

@@ -35,14 +35,16 @@
 	 * @constructor
 	 */
 	function KvForm($targetForm, options) {
-		$targetForm = $($targetForm).css('display', 'block');
+		$targetForm = $($targetForm).css('visibility', 'visible');
 		options = options || {};
 
 		var $elements = $('input, select, textarea', $targetForm)
+		, $fSetHead = $('.fSetHead', $targetForm)
 		, $clickableElements = $('input[type="checkbox"], input[type="radio"]', $targetForm)
 		, $requiredElements = $('[required]', $targetForm)
-		, $sets = $('.fSet', $targetForm)
-		, $expandableSets = $('.expandableSet', $targetForm)
+		, $sets = $('.fSet:not(.fSetHead)', $targetForm)
+		, $expandableSets = $('.fSet.expandableSet', $targetForm)
+		, $nestedCheckboxSets = $('.fSet.nestedCheckboxSet', $targetForm)
 		, $clickableSets
 		, formValidationObj;
 
@@ -52,21 +54,36 @@
 		// Set required fSet
 		$requiredElements.closest('.fSet').addClass('required');
 
-		// Set expandable fSets
-		if (typeof kv.ExpandableSet == 'function') {
-			$expandableSets.each(function () {
-				new kv.ExpandableSet(options, this);
-			});
-		}
-
 		// Set clickable fSet
+		// @todo this is a bit sloppy in that it re-adds the "clickableSet" class on the same fSets
 		$clickableSets = $clickableElements
 			.closest('.fSet')
 			.addClass('clickableSet');
 
-		if (typeof kv.ClickableSet == 'function') {
-			$clickableSets.each(function () {
-				new kv.ClickableSet(options, this);
+
+		/**
+		 * <div class="fSetHead">
+		 *     <div class="fSetInner">
+		 *         <div class="label">label</div>
+		 *      </div>
+		 * </div>
+		 */
+		$fSetHead.each(function () {
+			var $this = $(this);
+			$this.html($fSetInner.clone().html($('<div class="label" />').html($this.text())));
+		});
+
+		if (typeof kv.NestedCheckboxSet == 'function') {
+			$nestedCheckboxSets.each(function () {
+				new kv.NestedCheckboxSet(this);
+			});
+		}
+
+		// Set expandable fSets
+		// @todo this currently depends on kv.NestedCheckbox running first because fSetHead could exist without a fSetInner in the case of nestedCheckboxSets
+		if (typeof kv.ExpandableSet == 'function') {
+			$expandableSets.each(function () {
+				new kv.ExpandableSet(this, options);
 			});
 		}
 
