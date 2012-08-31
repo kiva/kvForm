@@ -1,1 +1,7 @@
-body    { width: 960px; margin: 0 auto; }
+body                { width: 960px; margin: 0 auto; padding: 20px 0; }
+body > header h1    { font-size: 1.4286em; margin-bottom: 20px; }
+
+.demoGroup  { margin-bottom: 60px;  }
+.demoGroup > header { margin-bottom: 5px; }
+
+.demoItem   { background-color: #fff; border: #888 1px solid; padding: 20px; }
