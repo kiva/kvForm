@@ -272,6 +272,7 @@ Instance of kv.form:
 			, onErrorMsg: ''
 			, onSuccessMsg: ''
 			, helpMsg: ''
+			, set: formSetObj
 		}
 	]
 	, groups: {
@@ -318,7 +319,34 @@ Instance of kv.validate
  this.msg('elementName', 'message');
 
 
+this.showError('element', 'message');
+
  */
+
+/***
+ *
+
+ var kvFormSetObj = kvFormObj.get('id');
+ kvFormSetObj.check();
+ kvFormSetObj.unCheck();
+
+ kvFormSetObj.close();
+ kvFormSetObj.expand();
+
+ kvFormSetObj.checkMaster();
+ kvFormSetObj.unCheckMaster();
+
+ kvFormSetObj.showError('errorName');
+ kvFormSetObj.showErrors(); // loops through and shows all errors
+ kvFormSetObj.hideError('errorName');
+ kvFormSetObj.hideErrors(); // loops through and hides all errors
+
+ kvFormSetObj.validate();
+ kvFormSetObj.validate();
+
+ *
+ */
+
 
 
 
