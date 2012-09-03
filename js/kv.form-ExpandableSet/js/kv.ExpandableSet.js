@@ -87,6 +87,7 @@
 	/**
 	 * Closes the expandableSet
 	 */
+
 	ExpandableSet.prototype.close = function () {
 		var self = this;
 

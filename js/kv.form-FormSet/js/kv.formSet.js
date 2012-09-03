@@ -27,35 +27,36 @@
 	}
 
 
-	kv.FormSet = function (formSet) {
+	kv.FormSet = function (formSet, options) {
 		var $element = $()
 		, $formSet = $(formSet)
 		, $fSetHead = $('.fSetHead', $formSet)
+		, inputType = $element.attr('type');
 
+		this.$element = $element;
 		this.isRequired = !!$element.attr('required');
+		this.isExpandableSet = $formSet.hasClass('expandableSet');
+		this.isNestedCheckboxSet = $formSet.hasClass('nestedCheckboxSet');
+		this.isClickableSet = inputType == 'radio' || inputType == 'checkbox';
+
+		innerWrap($formSet);
+
 		if (this.isRequired) {
 			$formSet.addClass('required');
 		}
 
-		var inputType = $element.attr('type');
-		this.isClickableSet = inputType == 'radio' || inputType == 'checkbox';
-
-
-		this.isExpandableSet = $formSet.hasClass('expandableSet');
-		this.isNestedCheckboxSet = $formSet.hasClass('nestedCheckboxSet');
-
-		innerWrap($formSet);
 		$fSetHead.html($fSetInner.clone().html($('<div class="label" />').html($fSetHead.text())));
 
-
 		if (typeof kv.NestedCheckboxSet == 'function' && this.isNestedCheckboxSet) {
-			new kv.NestedCheckboxSet($formSet);
+			this.nestedCheckboxSet()
 		}
-
 
 		if (typeof kv.ExpandableSet == 'function' && this.isExpandableSet) {
-			new kv.ExpandableSet(this, {});
+			this.expandableSet();
 		}
+
+		// Bind to the jquery.h5Validate events here
+		/** @todo **/
 	};
 
 }(jQuery, kv, this));
