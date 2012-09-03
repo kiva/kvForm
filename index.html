@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="/js/kv.form/css/kv.form.css" />
 	<link rel="stylesheet" href="/js/kv.form-ExpandableSet/css/kv.ExpandableSet.css" />
 	<link rel="stylesheet" href="/js/kv.form-NestedCheckboxSet/css/kv.NestedCheckboxSet.css" />
+	<link rel="stylesheet" href="/js/kv.form-Validation/css/kv.formValidation.css" />
 	<title>Forms - Demo Page</title>
 	<script src="/lib/modernizr.js"></script>
 </head>
@@ -26,13 +27,28 @@
 
 				<div class="demoGroup">
 					<header>
-						<h1>Demo group 1</h1>
+						<h2>Demo group 1</h2>
 					</header>
 
 					<div class="demoItem">
 						<div class="fSet">
 							<label>Label #1</label>
-							<input type="text" />
+							<input type="text" name=""/>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="demoGroup">
+					<header>
+						<h2>Demo group 1b</h2>
+						<h3>Required elements</h3>
+					</header>
+
+					<div class="demoItem">
+						<div class="fSet">
+							<label>Label #1</label>
+							<input type="text" name="" required />
 						</div>
 					</div>
 				</div>
@@ -46,17 +62,41 @@
 					<div class="demoItem">
 						<div class="fSet">
 							<label>Label #1</label>
-							<input type="text">
+							<input type="text" name="">
 						</div>
 
 						<div class="fSet">
 							<label>Label #2</label>
-							<input type="text">
+							<input type="text" name="">
 						</div>
 
 						<div class="fSet">
 							<label>Label #3</label>
-							<input type="text">
+							<input type="text" name="">
+						</div>
+					</div>
+				</div>
+
+
+				<div class="demoGroup">
+					<header>
+						<h1>Demo group 2a</h1>
+					</header>
+
+					<div class="demoItem">
+						<div class="fSet">
+							<label>Label 1 - email</label>
+							<input type="email" name="">
+						</div>
+
+						<div class="fSet">
+							<label>Label #2 - date</label>
+							<input type="text" name="">
+						</div>
+
+						<div class="fSet">
+							<label>Label #3</label>
+							<input type="text" name="">
 						</div>
 					</div>
 				</div>
@@ -69,17 +109,17 @@
 
 					<div class="demoItem">
 						<div class="fSet">
-							<input type="checkbox">
+							<input type="checkbox" name="">
 							<label>Label #1</label>
 						</div>
 
 						<div class="fSet">
-							<input type="checkbox">
+							<input type="checkbox" name="">
 							<label>Label #2</label>
 						</div>
 
 						<div class="fSet">
-							<input type="checkbox">
+							<input type="checkbox" name="">
 							<label>Label #3</label>
 						</div>
 					</div>
@@ -97,17 +137,17 @@
 							<div class="fSet fSetHead">Label #1</div>
 							<div class="fSet">
 								<div class="fSet">
-									<input type="checkbox">
+									<input type="checkbox" name="">
 									<label>Label #1</label>
 								</div>
 
 								<div class="fSet">
-									<input type="checkbox">
+									<input type="checkbox" name="">
 									<label>Label #2</label>
 								</div>
 
 								<div class="fSet">
-									<input type="checkbox">
+									<input type="checkbox" name="">
 									<label>Label #3</label>
 								</div>
 							</div>
@@ -127,17 +167,17 @@
 							<div class="fSet fSetHead">Label #1</div>
 							<div class="fSet">
 								<div class="fSet">
-									<input type="checkbox">
+									<input type="checkbox" name="">
 									<label>Label #1</label>
 								</div>
 
 								<div class="fSet">
-									<input type="checkbox">
+									<input type="checkbox" name="">
 									<label>Label #2</label>
 								</div>
 
 								<div class="fSet">
-									<input type="checkbox">
+									<input type="checkbox" name="">
 									<label>Label #3</label>
 								</div>
 							</div>
@@ -157,23 +197,25 @@
 							<div class="fSet fSetHead">Label #1</div>
 							<div class="fSet">
 								<div class="fSet">
-									<input type="checkbox">
+									<input type="checkbox" name="">
 									<label>Label #1</label>
 								</div>
 
 								<div class="fSet">
-									<input type="checkbox">
+									<input type="checkbox" name="">
 									<label>Label #2</label>
 								</div>
 
 								<div class="fSet">
-									<input type="checkbox">
+									<input type="checkbox" name="">
 									<label>Label #3</label>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+
+				<input type="submit" />
 			</form>
 		</div>
 
@@ -187,6 +229,7 @@
 	<script src="/js/kv.form/js/kv.form.js"></script>
 	<script src="/js/kv.form-ExpandableSet/js/kv.ExpandableSet.js"></script>
 	<script src="/js/kv.form-NestedCheckboxSet/js/kv.NestedCheckboxSet.js"></script>
+	<script src="/js/kv.form-Validation/js/kv.formValidation.js"></script>
 	<!-- <script src="/js/kv.form-h5shim/js/kv.form-h5shim.js"></script> -->
 
 	<script>
@@ -194,6 +237,7 @@
 			, {
 				beforeSubmit: function () { console.log('hi');}
 				, data: { key1: 'value1', key2: 'value2' }
+				, validation: {}
 			}
 		);
 	</script>

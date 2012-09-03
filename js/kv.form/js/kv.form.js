@@ -2,7 +2,8 @@
 	'use strict';
 
 
-	var $fSetInner = $('<div class="fSetInner" />');
+	var $fSetInner = $('<div class="fSetInner" />')
+	, id = 0;
 
 
 	/**
@@ -91,42 +92,63 @@
 			$targetForm.ajaxForm(options);
 		}
 
-		if (typeof kv.formValidation  == 'function' && options.validation) {
-			formValidationObj = kv.formValidation(options.validation);
+		if (typeof kv.Validation  == 'function' && options.validation) {
+			formValidationObj = kv.Validation($targetForm, options.validation);
 
 			if (formValidationObj) {
 				// merge the object into the kvFormObject
 			}
 		}
 
+		var $formElements = $('[name]', $elements);
+		var formElements = [];
+		var formElement;
+
+		$formElements.each(function (index, el) {;
+			formElements.push(
+				formElement = {
+					el: el
+					, $el: $(el)
+					, isValid: undefined /* true false or undefined */
+				}
+			);
+		});
+
+
+		// undefined, error, valid,
+
 		return {
-			settings: options
-		}
+			id: id++
+			, settings: options
+			, form: $targetForm
+			, isValid: undefined
+			, submitStatus: 'notSubmitted' // 'notSubmitted, submitted
+			, elements: formElements
+			, errorMessageMap: {/*elementName: errorMessage */}
+		};
 	}
 
+	/**
+	 * @todo Need to revisit how we handle the caching of objects on a form element's data attribute
+	 * Currently kv.jqueryExtend does it for us, but we want it to also work when someone calls it via kv.form as well
+	 *
+	 * @param $targetForm
+	 * @param options
+	 * @return {KvForm}
+	 */
+	kv.form = function ($targetForm, options) {
+		var kvForm = $.data($targetForm[0], 'kv-form');
 
-	kv.extend({
-		/**
-		 * @todo Need to revisit how we handle the caching of objects on a form element's data attribute
-		 * Currently kv.jqueryExtend does it for us, but we want it to also work when someone calls it via kv.form as well
-		 *
-		 * @param $targetForm
-		 * @param options
-		 * @return {KvForm}
-		 */
-		form: function ($targetForm, options) {
-			var kvForm = $.data($targetForm[0], 'kv-form');
-
-			if (kvForm) {
-				return kvForm;
-			}
-
-			kvForm = new KvForm($targetForm, options);
-			$.data($targetForm[0], 'kv-form', kvForm);
-
+		if (kvForm) {
 			return kvForm;
 		}
-	});
+
+		kvForm = new KvForm($targetForm, options);
+		$.data($targetForm[0], 'kv-form', kvForm);
+
+		return kvForm;
+	}
+
 
 	$.fn.kvForm = kv.jqueryExtend('form');
 }());
@@ -179,7 +201,12 @@
 		return {
 			id: 82892
 			, settings: options
-			, elements: {}
+			,
+			, elements: {
+				el: HTMLElement
+				, $el: $HTMLElement
+				, valid: boolean
+			}
 			, groups: {}
 		};
 
@@ -240,7 +267,6 @@ Instance of kv.form:
 		{el: HTMLElement
 			, $el: $HTMLElement
 			, state: 'undefined', 'hasError', 'valid'
-			, type: corresponds to an HTML5 type, can be manually set via js, or gets it from the html element
 			, isRequired: true or false
 			, value: ''
 			, onErrorMsg: ''
@@ -275,6 +301,24 @@ Instance of kv.validate
 	]
 }
 */
+
+
+/**
+
+ var formMsgObj = kv.formMsg('formName', Options);
+
+ formMsgObj.show('formName', 'message');
+ formMsgObj.show('formName', 'elementId' , 'message');
+
+ formMsgObj.add()
+
+ formMsgObj.hide
+
+ this.msg('')
+ this.msg('elementName', 'message');
+
+
+ */
 
 
 
