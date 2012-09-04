@@ -1,0 +1,24 @@
+## API
+
+
+```
+formObj.formMsg('message');
+
+formObj.formMsg('elementName', 'messageName' , 'message');
+
+/**
+ * elementName - required
+ * messageName - required (should this be optional?  It will be unique to each element)
+ * message - required
+ * type - optional
+ *
+formObj.formMsg('elementName', 'messageName' , 'message', 'type');
+
+formObj.formMsg('masterCheckboxNameORId', 'messageName', 'message');
+
+formObj.formError(); // does the same as formMsg() but styles it as an error.
+
+
+formObj.hideMsgs();
+formObj.hideMsg('name');
+

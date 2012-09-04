@@ -275,6 +275,13 @@ Instance of kv.form:
 			, set: formSetObj
 		}
 	]
+	, formSets: [
+		{}
+		, {}
+		, {}
+		, {}
+		, {}
+	]
 	, groups: {
 		groupName: {
 			groupEl: HTMLElement
