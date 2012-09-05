@@ -17,10 +17,14 @@
 		$targetForm = $($targetForm).css('visibility', 'visible');
 		options = options || {};
 
-		var $fSetHead = $('.fSetHead', $targetForm)
-		, $fSets = $('.fSet:not(.fSetHead)', $targetForm)
-		, formSetMap = {}
-		, self = this;
+		var $fSetHead = $('.fSetHead', $targetForm);
+
+		this.$form = $targetForm;
+		this.settings = options;
+		this.attributes = {};
+		this.formSetsCollection = [];
+		this.formSetMap = {};
+		this.submitStatus = 'notSubmitted'; // or 'submitted'
 
 		/**
 		 * <div class="fSetHead">
@@ -34,44 +38,55 @@
 			$this.html($fSetInner.clone().html($('<div class="label" />').html($this.text()))).addClass('fSet');
 		});
 
-		this.formSetsCollection = [];
+		this.initFormSets();
 
-		// jQuery does depth-first traversal, by reversing the order we can ensure the child/leaf nodes get processed before the parent nodes
-		$.each($fSets.get().reverse(), function (index, fSet) {
-			var $fSet = $(fSet)
-			, $controlElement = $('> input, > textarea', $fSet).first()
-			, formSet = new kv.FormSet($fSet, $controlElement, options)
-			, formSetName = formSet.$controlElement.attr('name');
 
-			self.formSetsCollection[formSet.id] = formSet;
-
-			// Add to the formSetMap, one name to many ids.
-			if (formSetName) {
-				if (formSetMap[formSetName]) {
-					formSetMap[formSetName].push(formSet.id);
-				} else {
-					formSetMap[formSetName] = [formSet.id];
-				}
-			}
-		});
-
-		this.id = id++;
-		this.$form = $targetForm;
-		this.formSetMap = formSetMap;
-		this.settings = options;
-		this.submitStatus = 'notSubmitted'; // or 'submitted'
-		this.attributes = {};
-
+		/** @todo **/
 		if (typeof kv.form.prototype.form == 'function') {
 			this.form();
 		}
 
+		/** @todo **/
 		if (typeof kv.form.prototype.validate == 'function') {
 			this.validate();
 		}
+
+		this.id = id++;
 	}
 
 	KvForm.prototype = {
+
+
+		/**
+		 * Initialize / process all the formSets in the form
+		 */
+		initFormSets: function () {
+			var $fSets = $('.fSet:not(.fSetHead)', this.$form)
+			, self = this
+			, formSetMap = {};
+
+			// jQuery does depth-first traversal, by reversing the order we can ensure the child/leaf nodes get processed before the parent nodes
+			$.each($fSets.get().reverse(), function (index, fSet) {
+				var $fSet = $(fSet)
+				, $controlElement = $('> input, > textarea', $fSet).first()
+				, formSet = new kv.FormSet($fSet, $controlElement, this.settings)
+				, formSetName = formSet.$controlElement.attr('name');
+
+				self.formSetsCollection[formSet.id] = formSet;
+
+				// Add to the formSetMap, one name to many ids.
+				if (formSetName) {
+					if (formSetMap[formSetName]) {
+						formSetMap[formSetName].push(formSet.id);
+					} else {
+						formSetMap[formSetName] = [formSet.id];
+					}
+				}
+			});
+
+			this.formSetMap = formSetMap;
+		}
+
 
 		/**
 		 * Returns an array of formSets
@@ -79,7 +94,7 @@
 		 * @param {Array|String} names
 		 * @return {Array}
 		 */
-		formSets: function (names) {
+		, formSets: function (names) {
 			var formSets = []
 			, formSetIds = []
 			, i = 0;
