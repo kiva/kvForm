@@ -7,28 +7,6 @@
 
 
 	/**
-	 * Wraps all non-first select, input, textarea, and label child elements of an fSet with an .fSetInner element
-	 *
-	 * @param index
-	 * @param el
-	 */
-	function innerWrap(index, el) {
-		var $children = $(el).children('select, input, textarea, label')
-		, $firstEl = $children.first()
-		, $wrapMe = $children.not($firstEl)
-		, $wrapper;
-
-		// Bundle all $wrapMe elements into one and add them back into the dom
-		if ($wrapMe.length > 0) {
-			$wrapMe.remove();
-			$wrapper = $wrapMe.wrapAll($fSetInner).parent();
-
-			$firstEl.after($wrapper);
-		}
-	}
-
-
-	/**
 	 *
 	 * @param $targetForm
 	 * @param options
@@ -39,28 +17,13 @@
 		$targetForm = $($targetForm).css('visibility', 'visible');
 		options = options || {};
 
-		var $elements = $('input, select, textarea', $targetForm)
-		, $fSetHead = $('.fSetHead', $targetForm)
-		, $clickableElements = $('input[type="checkbox"], input[type="radio"]', $targetForm)
-		, $requiredElements = $('[required]', $targetForm)
-		, $sets = $('.fSet:not(.fSetHead)', $targetForm)
-		, $expandableSets = $('.fSet.expandableSet', $targetForm)
-		, $nestedCheckboxSets = $('.fSet.nestedCheckboxSet', $targetForm)
-		, $clickableSets
-		, formValidationObj
+		var $fSetHead = $('.fSetHead', $targetForm)
+		, $fSets = $('.fSet:not(.fSetHead)', $targetForm)
+		, formSetMap = {}
 		, self = this;
 
-		// Wrap inner elements
-		$sets.each(innerWrap);
-
 		// Set required fSet
-		$requiredElements.closest('.fSet').addClass('required');
-
-		// Set clickable fSet
-		// @todo this is a bit sloppy in that it re-adds the "clickableSet" class on the same fSets
-		$clickableSets = $clickableElements
-			.closest('.fSet')
-			.addClass('clickableSet');
+		// @todo move this to the validation plugin --> $requiredElements.closest('.fSet').addClass('required')
 
 
 		/**
@@ -75,23 +38,98 @@
 			$this.html($fSetInner.clone().html($('<div class="label" />').html($this.text())));
 		});
 
+		this.formSetsCollection = [];
+		$fSets.each(function (index, fSet) {
+			var $fSet = $(fSet)
+			, $controlElement = $('> input, > textarea', $fSet).first()
+			, formSet = new kv.FormSet($fSet, $controlElement, options)
+			, formSetName = formSet.$controlElement.attr('name');
 
-		this.formSets = [];
-		$sets.each(function (index, fSet) {
-			self.formSets.push(new kv.FormSet(fSet));
+			self.formSetsCollection[formSet.id] = formSet;
+
+			// Add to the formSetMap, one name to many ids.
+			if (formSetName) {
+				if (formSetMap[formSetName]) {
+					formSetMap[formSetName].push(formSet.id);
+				} else {
+					formSetMap[formSetName] = [formSet.id];
+				}
+			}
 		});
 
+		this.id = id++;
+		this.$form = $targetForm;
+		this.formSetMap = formSetMap;
+		this.settings = options;
+		this.submitStatus = 'notSubmitted'; // or 'submitted'
+		this.attributes = {};
 
-		return {
-			id: id++
-			, settings: options
-			, form: $targetForm
-			, isValid: undefined
-			, submitStatus: 'notSubmitted' // 'notSubmitted, submitted
-			//, elements: formElements
-			, errorMessageMap: {/*elementName: errorMessage */}
-		};
+		if (typeof kv.form.prototype.form == 'function') {
+			this.form();
+		}
+
+		if (typeof kv.form.prototype.validate == 'function') {
+			this.validate();
+		}
 	}
+
+	KvForm.prototype = {
+
+		/**
+		 * Returns an array of formSets
+		 *
+		 * @param {Array|String} names
+		 * @return {Array}
+		 */
+		formSets: function (names) {
+			var formSets = []
+			, formSetIds = []
+			, i = 0;
+
+			if (typeof names == 'string') {
+				names = [names];
+			}
+
+			if ($.isArray(names)) {
+				// Get all the ids that correspond to the given names
+				for (i; i < names.length; i++) {
+					formSetIds = formSetIds.concat(this.formSetMap[names[i]]);
+				}
+
+				// Get all the formSets that match the ids
+				for (i = 0; i < formSetIds.length; i++) {
+					formSets.push(this.formSetsCollection[formSetIds[i]])
+				}
+			}
+
+			return formSets;
+		}
+
+		, attr: function (props, val) {
+			var k;
+
+			if (props instanceof jQuery) {
+				return props.attr(val);
+			}
+
+			if (typeof props == 'object') {
+				for (k in props) {
+					this.attributes[k] = props[k];
+				}
+
+				return this;
+			}
+
+			if (typeof val != 'object' && val !== undefined) {
+				this.attributes[props] = val;
+
+				return this;
+			}
+
+			return this.attributes[props];
+		}
+	};
+
 
 	/**
 	 * @todo Need to revisit how we handle the caching of objects on a form element's data attribute
@@ -112,7 +150,7 @@
 		$.data($targetForm[0], 'kv-form', kvForm);
 
 		return kvForm;
-	}
+	};
 
 
 	$.fn.kvForm = kv.jqueryExtend('form');

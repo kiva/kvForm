@@ -16,6 +16,10 @@
 		});
 	}
 
+	// @todo add this
+	this.isValid = undefined;
+	this.errorMessageMap = {};
+
 
 	kv.Validation = function ($form, options) {
 		var h5ValidationObj
