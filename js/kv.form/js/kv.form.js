@@ -168,11 +168,6 @@
 	};
 
 
-	kv.form.childFormSets = function ($element) {
-
-	};
-
-
 	$.fn.kvForm = kv.jqueryExtend('form');
 }());
 
