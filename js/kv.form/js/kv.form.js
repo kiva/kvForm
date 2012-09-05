@@ -98,7 +98,9 @@
 
 				// Get all the formSets that match the ids
 				for (i = 0; i < formSetIds.length; i++) {
-					formSets.push(this.formSetsCollection[formSetIds[i]])
+					if (this.formSetsCollection[formSetIds[i]]) {
+						formSets.push(this.formSetsCollection[formSetIds[i]])
+					}
 				}
 			}
 
