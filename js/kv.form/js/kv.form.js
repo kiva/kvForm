@@ -48,6 +48,10 @@
 			, self = this
 			, formSetMap = {};
 
+			if ($fSets.length && typeof kv.FormSet != 'function') {
+				throw 'missing kv.FormSets';
+			}
+
 			// jQuery does depth-first traversal, by reversing the order we can ensure the child/leaf nodes get processed before the parent nodes
 			$.each($fSets.get().reverse(), function (index, fSet) {
 				var $fSet = $(fSet)

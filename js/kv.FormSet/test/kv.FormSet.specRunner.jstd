@@ -5,8 +5,8 @@ load:
   - ../../../lib/jquery.js
 
   - ../../../lib/kv.js
-  - ../../kv.FormSet/js/kv.FormSet.js
-  - ../js/kv.form.js
+  - ../../kv.form/js/kv.form.js
+  - ../js/kv.FormSet.js
 
 test:
-  - spec/kv.form.js
+  - spec/kv.FormSet.js

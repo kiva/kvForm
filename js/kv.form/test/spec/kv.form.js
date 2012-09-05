@@ -21,24 +21,8 @@ describe('kv.form', function() {
 	});
 
 
-	it('extends the kv prototype with the "kvForm" method', function () {
+	it('extends the jquery prototype with the "kvForm" method', function () {
 		expect(typeof $.fn.kvForm).toBe('function');
-	});
-
-
-	it('sets the class, "required", on all .fSet parents of a required form element', function () {
-		var $parentFSet = $('[required]', $form).closest('.fSet');
-
-		$parentFSet.each(function () {
-			expect($(this).hasClass('required')).toBe(true);
-		});
-	});
-
-
-	it('sets the class, "fCSet" on all .fSet parents of a checkbox or radio form element', function () {
-		var $parentFSet = $('[type="radio"], [type="checkbox"]', $form).closest('.fSet');
-
-		expect($parentFSet.hasClass('clickableSet')).toBe(true);
 	});
 
 
@@ -50,7 +34,7 @@ describe('kv.form', function() {
 	});
 
 
-	it('internally calls jquery.form\'s .ajaxForm method if it exists', function () {
+	xit('internally calls jquery.form\'s .ajaxForm method if it exists', function () {
 		var $myForm  = $(' <form class="kvForm fStack"></div>')
 		, myOptions = {var1: 'uno', var2: 'dos'};
 
@@ -69,7 +53,7 @@ describe('kv.form', function() {
 	});
 
 
-	it('internally calls kv.formValidation if it exists', function () {
+	xit('internally calls kv.formValidation if it exists', function () {
 		var $myForm  = $(' <form class="kvForm fStack"></div>')
 		, myValidationOptions = {someValidationSetting: true}
 		, myOptions = {var1: 'uno', var2: 'dos', validation: myValidationOptions};
