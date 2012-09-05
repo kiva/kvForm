@@ -1,27 +1,27 @@
 (function ($, kv, global, undefined) {
 
-	kv.formMsg = function (kvFormObj) {
+	kv.FormMsg = function (kvFormObj) {
 		//** Set up the html + css **//
 
 	};
 
 
-	kv.form.prototype.showMsgs = function () {
+	kv.Form.prototype.showMsgs = function () {
 
 	}
 
 
-	kv.form.prototype.hideMsgs = function () {
+	kv.Form.prototype.hideMsgs = function () {
 
 	}
 
 
-	kv.form.prototype.showMsg = function () {
+	kv.Form.prototype.showMsg = function () {
 
 	};
 
 
-	kv.form.prototype.hideMsg = function () {
+	kv.Form.prototype.hideMsg = function () {
 
 	};
 
