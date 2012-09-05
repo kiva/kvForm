@@ -22,10 +22,6 @@
 		, formSetMap = {}
 		, self = this;
 
-		// Set required fSet
-		// @todo move this to the validation plugin --> $requiredElements.closest('.fSet').addClass('required')
-
-
 		/**
 		 * <div class="fSetHead">
 		 *     <div class="fSetInner">
@@ -39,7 +35,9 @@
 		});
 
 		this.formSetsCollection = [];
-		$fSets.each(function (index, fSet) {
+
+		// jQuery does depth-first traversal, by reversing the order we can ensure the child/leaf nodes get processed before the parent nodes
+		$.each($fSets.get().reverse(), function (index, fSet) {
 			var $fSet = $(fSet)
 			, $controlElement = $('> input, > textarea', $fSet).first()
 			, formSet = new kv.FormSet($fSet, $controlElement, options)
@@ -152,6 +150,11 @@
 		$.data($targetForm[0], 'kv-form', kvForm);
 
 		return kvForm;
+	};
+
+
+	kv.form.childFormSets = function ($element) {
+
 	};
 
 
