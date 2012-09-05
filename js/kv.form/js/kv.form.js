@@ -17,8 +17,6 @@
 		$targetForm = $($targetForm).css('visibility', 'visible');
 		options = options || {};
 
-		var $fSetHead = $('.fSetHead', $targetForm);
-
 		this.$form = $targetForm;
 		this.settings = options;
 		this.attributes = {};
@@ -26,20 +24,7 @@
 		this.formSetMap = {};
 		this.submitStatus = 'notSubmitted'; // or 'submitted'
 
-		/**
-		 * <div class="fSetHead">
-		 *     <div class="fSetInner">
-		 *         <div class="label">label</div>
-		 *      </div>
-		 * </div>
-		 */
-		$fSetHead.each(function () {
-			var $this = $(this);
-			$this.html($fSetInner.clone().html($('<div class="label" />').html($this.text()))).addClass('fSet');
-		});
-
 		this.initFormSets();
-
 
 		/** @todo **/
 		if (typeof kv.form.prototype.form == 'function') {
@@ -61,7 +46,7 @@
 		 * Initialize / process all the formSets in the form
 		 */
 		initFormSets: function () {
-			var $fSets = $('.fSet:not(.fSetHead)', this.$form)
+			var $fSets = $('.fSet, .fSetHead', this.$form)
 			, self = this
 			, formSetMap = {};
 
