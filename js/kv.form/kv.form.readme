@@ -1,0 +1,8 @@
+
+## Form structure definition
+
+* .fSet can have an immediate child controll element OR it can have nested .fSet/.fSetHead elements but NOT both
+
+
+## Todo
+* Add an event api, specifically, would be great to fire an event whenever an formSet attributes are modified.

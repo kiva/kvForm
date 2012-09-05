@@ -31,7 +31,7 @@
 		 */
 		$fSetHead.each(function () {
 			var $this = $(this);
-			$this.html($fSetInner.clone().html($('<div class="label" />').html($this.text())));
+			$this.html($fSetInner.clone().html($('<div class="label" />').html($this.text()))).addClass('fSet');
 		});
 
 		this.formSetsCollection = [];
