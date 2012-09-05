@@ -45,3 +45,6 @@ input[type="text"]
 .fSet:after { clear: both; }
 
 .fStack .fSetGroup > .fSet      { display: inline-block; margin-bottom: 0; margin-left: 0; }
+
+/* Clickable set */
+.kvForm .clickableSet > .fSetInner label    { font-weight: normal; }
