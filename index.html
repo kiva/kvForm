@@ -11,7 +11,6 @@
 	<link rel="stylesheet" href="/js/kv.form/css/kv.form.css" />
 	<link rel="stylesheet" href="/js/kv.form-ExpandableSet/css/kv.ExpandableSet.css" />
 	<link rel="stylesheet" href="/js/kv.form-NestedCheckboxSet/css/kv.NestedCheckboxSet.css" />
-	<link rel="stylesheet" href="/js/kv.form-Validation/css/kv.formValidation.css" />
 	<title>Forms - Demo Page</title>
 	<script src="/lib/modernizr.js"></script>
 </head>
@@ -254,13 +253,13 @@
 	<script src="/lib/jquery.h5validate.js"></script>
 	<script src="/lib/kv.js"></script>
 	<script src="/js/kv.form/js/kv.form.js"></script>
-	<script src="/js/kv.form-ExpandableSet/js/kv.ExpandableSet.js"></script>
-	<script src="/js/kv.form-NestedCheckboxSet/js/kv.NestedCheckboxSet.js"></script>
-	<script src="/js/kv.form-Validation/js/kv.formValidation.js"></script>
+	<script src="/js/kv.FormSet/js/kv.FormSet.js"></script>
+	<script src="/js/kv.FormSet.expandable/js/kv.formSet.expandable.js"></script>
+	<script src="/js/kv.FormSet.nestedCheckbox/js/kv.formSet.nestedCheckbox.js"></script>
 	<!-- <script src="/js/kv.form-h5shim/js/kv.form-h5shim.js"></script> -->
 
 	<script>
-		kv.form($('.kvForm')
+		var kvForm = kv.form($('.kvForm')
 			, {
 				beforeSubmit: function () { console.log('hi');}
 				, data: { key1: 'value1', key2: 'value2' }

@@ -47,7 +47,8 @@
 		, $expandableSets = $('.fSet.expandableSet', $targetForm)
 		, $nestedCheckboxSets = $('.fSet.nestedCheckboxSet', $targetForm)
 		, $clickableSets
-		, formValidationObj;
+		, formValidationObj
+		, self = this;
 
 		// Wrap inner elements
 		$sets.each(innerWrap);
@@ -74,48 +75,12 @@
 			$this.html($fSetInner.clone().html($('<div class="label" />').html($this.text())));
 		});
 
-		if (typeof kv.NestedCheckboxSet == 'function') {
-			$nestedCheckboxSets.each(function () {
-				new kv.NestedCheckboxSet(this);
-			});
-		}
 
-		// Set expandable fSets
-		// @todo this currently depends on kv.NestedCheckbox running first because fSetHead could exist without a fSetInner in the case of nestedCheckboxSets
-		if (typeof kv.ExpandableSet == 'function') {
-			$expandableSets.each(function () {
-				new kv.ExpandableSet(this, options);
-			});
-		}
-
-		if (typeof $.fn.ajaxForm == 'function') {
-			$targetForm.ajaxForm(options);
-		}
-
-		if (typeof kv.Validation  == 'function' && options.validation) {
-			formValidationObj = kv.Validation($targetForm, options.validation);
-
-			if (formValidationObj) {
-				// merge the object into the kvFormObject
-			}
-		}
-
-		var $formElements = $('[name]', $elements);
-		var formElements = [];
-		var formElement;
-
-		$formElements.each(function (index, el) {;
-			formElements.push(
-				formElement = {
-					el: el
-					, $el: $(el)
-					, isValid: undefined /* true false or undefined */
-				}
-			);
+		this.formSets = [];
+		$sets.each(function (index, fSet) {
+			self.formSets.push(new kv.FormSet(fSet));
 		});
 
-
-		// undefined, error, valid,
 
 		return {
 			id: id++
@@ -123,7 +88,7 @@
 			, form: $targetForm
 			, isValid: undefined
 			, submitStatus: 'notSubmitted' // 'notSubmitted, submitted
-			, elements: formElements
+			//, elements: formElements
 			, errorMessageMap: {/*elementName: errorMessage */}
 		};
 	}
