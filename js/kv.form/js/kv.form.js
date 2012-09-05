@@ -6,13 +6,27 @@
 
 
 	/**
+	 * @todo Need to revisit how we handle the caching of objects on a form element's data attribute
+	 * Currently kv.jqueryExtend does it for us, but we want it to also work when someone calls it via kv.Form as well
 	 *
 	 * @param $targetForm
 	 * @param options
+	 * @return {*}
 	 * @constructor
 	 */
-	function KvForm($targetForm, options) {
+	kv.Form = function ($targetForm, options) {
 		$targetForm = $($targetForm).css('visibility', 'visible');
+
+		var kvForm = $.data($targetForm[0], 'kv-form');
+
+		if (kvForm) {
+			return kvForm;
+		}
+
+		if (!(this instanceof kv.Form)) {
+            return new kv.Form($targetForm, options);
+        }
+
 		options = options || {};
 
 		this.$form = $targetForm;
@@ -25,19 +39,21 @@
 		this.initFormSets();
 
 		/** @todo **/
-		if (typeof kv.form.prototype.form == 'function') {
+		if (typeof kv.Form.prototype.form == 'function') {
 			this.form();
 		}
 
 		/** @todo **/
-		if (typeof kv.form.prototype.validate == 'function') {
+		if (typeof kv.Form.prototype.validate == 'function') {
 			this.validate();
 		}
 
 		this.id = id++;
-	}
+		$.data($targetForm[0], 'kv-form', this);
+	};
 
-	KvForm.prototype = {
+
+	kv.Form.prototype = {
 
 
 		/**
@@ -107,6 +123,12 @@
 			return formSets;
 		}
 
+
+		/**
+		 * @params {Object|String} props
+		 * @params {String} val
+		 * @returns {*}
+		 */
 		, attr: function (props, val) {
 			var k;
 
@@ -133,36 +155,15 @@
 	};
 
 
-	/**
-	 * @todo Need to revisit how we handle the caching of objects on a form element's data attribute
-	 * Currently kv.jqueryExtend does it for us, but we want it to also work when someone calls it via kv.form as well
-	 *
-	 * @param $targetForm
-	 * @param options
-	 * @return {KvForm}
-	 */
-	kv.form = function ($targetForm, options) {
-		var kvForm = $.data($targetForm[0], 'kv-form');
-
-		if (kvForm) {
-			return kvForm;
-		}
-
-		kvForm = new KvForm($targetForm, options);
-		$.data($targetForm[0], 'kv-form', kvForm);
-
-		return kvForm;
-	};
-
-
-	$.fn.kvForm = kv.jqueryExtend('form');
+	// @todo - make kv.jqueryExtend() work with nested functions
+	//$.fn.kvForm = kv.jqueryExtend('kv.Form');
 }(jQuery, kv, this));
 
 
-		// kv.form.settings() returns an object of settings
-		// kv.form.settings('expandable', false);
-		// kv.form.settings('validate', false);
-		// kv.form.settings('h5Shim', false);
+		// kv.Form.settings() returns an object of settings
+		// kv.Form.settings('expandable', false);
+		// kv.Form.settings('validate', false);
+		// kv.Form.settings('h5Shim', false);
 
 		// options.validate = {}
 
@@ -194,11 +195,11 @@
 			, expandableSets: true
 		});
 
-		if ($myForm.data('kv-form').settings('validation') && kv.formValidation) {
+		if ($myForm.data('kv-form').settings('validation') && kv.FormValidation) {
 			$myForm.kvValidate($myForm.data('kv-form').settings('validation'));
 		}
 
-		if ($myForm.data('kv-form').settings('expandable') && kv.formExpanableSets) {
+		if ($myForm.data('kv-form').settings('expandable') && kv.FormExpanableSets) {
 			$myForm.kvExpandableSets();
 		}
 
@@ -216,14 +217,14 @@
 		};
 
 		// The validation and form objects get merged into one kvForm object when returned
-		// Otherwise, it is possible to call kv.formValidation() directly and get a kv.formValidation object
+		// Otherwise, it is possible to call kv.FormValidation() directly and get a kv.FormValidation object
 
 
-		kv.form.enabled.expandable
-		kv.form.enabled.validate
+		kv.Form.enabled.expandable
+		kv.Form.enabled.validate
 
-		kv.formExpandable
-		kv.formValidate
+		kv.FormExpandable
+		kv.FormValidate
 	}
 
 
@@ -245,7 +246,7 @@ $(myForm).kvForm(settings);
 
 OR:
 
-kv.form('.myForm', settings);
+kv.Form('.myForm', settings);
 
 settings: {
 	enableExpand: boolean [true by default]
@@ -254,15 +255,15 @@ settings: {
 }
 
 
-You can pass kv.form a kv.validate instance or a plain js object
+You can pass kv.Form a kv.validate instance or a plain js object
 
-passed into kv.form:
+passed into kv.Form:
 
 {
 	name:
 }
 
-Instance of kv.form:
+Instance of kv.Form:
 {
 	id: 829
 	, validation: kvValidationObject
@@ -318,7 +319,7 @@ Instance of kv.validate
 
 /**
 
- var formMsgObj = kv.formMsg('formName', Options);
+ var formMsgObj = kv.FormMsg('formName', Options);
 
  formMsgObj.show('formName', 'message');
  formMsgObj.show('formName', 'elementId' , 'message');
