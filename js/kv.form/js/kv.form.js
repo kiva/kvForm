@@ -1,16 +1,14 @@
-(function () {
+(function ($, kv, global, undefined) {
 	'use strict';
 
 
-	var $fSetInner = $('<div class="fSetInner" />')
-	, id = 0;
+	var id = 0;
 
 
 	/**
 	 *
 	 * @param $targetForm
 	 * @param options
-	 * @return {Object}
 	 * @constructor
 	 */
 	function KvForm($targetForm, options) {
@@ -154,7 +152,7 @@
 
 
 	$.fn.kvForm = kv.jqueryExtend('form');
-}());
+}(jQuery, kv, this));
 
 
 		// kv.form.settings() returns an object of settings
