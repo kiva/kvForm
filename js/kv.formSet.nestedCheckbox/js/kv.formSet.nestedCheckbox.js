@@ -9,9 +9,9 @@
 		this.$checkboxes.prop('checked', event.target.checked).change();
 	}
 
+
 	function handleCheckboxChange(event) {
 		var checkedCounter = 0;
-
 		this.$checkboxes.each(function () {
 			if (this.checked) {
 				checkedCounter++;
@@ -42,31 +42,36 @@
 	 * @param {jQuery} $nestedCheckboxSet
 	 * @constructor
 	 */
-	function kv.formSet.nestedCheckbox(formSet) {
+	kv.FormSet.prototype.nestedCheckbox = function () {
 		var elementId = 'masterCheckbox_' + id++
-		, $fSetHead = $('.fSetHead', $nestedCheckboxSet)
-		, $checkboxes = $('> .fSet >  .clickableSet > input[type="checkbox"]', $nestedCheckboxSet)
+		, $fSetHead = $('.fSetHead', this.$formSet)
+		, $checkboxes = $('> .fSet >  .clickableSet > input[type="checkbox"]', this.$formSet)
 		, $masterLabel = $('<label />').attr('for', elementId).text($fSetHead.text())
 		, $masterCheckbox = $_masterCheckbox.clone().attr('id', elementId)
 
-		formSet.$masterCheckbox = $masterCheckbox;
-		formSet.$checkboxes = $checkboxes;
+		// Make sure everything is structured the way we need it
+		$.each({fSetHead: $fSetHead, checkboxes: $checkboxes, masterLabel: $masterLabel}, function (key, val) {
+			if (val.length === 0) {
+				throw 'missing ' + key;
+			}
+		});
+
+		this.decorate('nestedCheckbox', {
+			$masterCheckbox: $masterCheckbox
+			, $checkboxes: $checkboxes
+		});
 
 		if ($checkboxes.length) {
-			$checkboxes.change($.proxy(handleCheckboxChange, formSet));
+			$checkboxes.change($.proxy(handleCheckboxChange, this));
 
 			if ($masterCheckbox.length) {
-				$masterCheckbox.click($.proxy(handleMasterCheckboxChange, formSet));
+				$masterCheckbox.click($.proxy(handleMasterCheckboxChange, this));
 			}
 		}
 
 		$fSetHead
 			.html($masterCheckbox)
 			.append($('<div class="fSetInner" />').wrapInner($masterLabel));
-
-		id++;
 	}
 
-
-	kv.form.extend('nestedCheckboxSet');
 }(jQuery, kv));
