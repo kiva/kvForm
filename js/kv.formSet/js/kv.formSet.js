@@ -46,14 +46,15 @@
 		this.decorators = [];
 		this.attributes = {};
 		this.settings = {};
-		this.$formSet = $($formSet);
+		this.$formSet = $formSet;
 		this.$fSetHead = $fSetHead;
 		this.$controlElement = $controlElement;
+		this.$labelElement = $('> label').first();
 
 		// Set clickable fSet
 		if (controlType == 'radio' || controlType == 'checkbox') {
 			this.attr('clickableSet', true);
-			$formSet.addClass('clickableSet');
+			this.$formSet.addClass('clickableSet');
 		} else {
 			this.attr('clickableSet', false);
 		}
@@ -75,7 +76,7 @@
 		// Bind to the jquery.h5Validate events here
 		/** @todo **/
 
-		this.id = id++;
+		this._id = id++;
 	};
 
 
@@ -129,6 +130,23 @@
 			}
 
 			return this.attributes[props];
+		}
+
+
+		/**
+		 * necessary?
+		 */
+		, name: function (name) {
+			return this.$controlElement.attr('name', name);
+		}
+
+
+		/**
+		 * necessary?
+		 */
+		, id: function (id) {
+			this.$labelElement.attr('for', id);
+			return this.$controlElement.attr('id', id);
 		}
 	};
 

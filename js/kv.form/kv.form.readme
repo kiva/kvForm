@@ -1,3 +1,5 @@
+* kv.Form and kv.FormSet ended up pretty tightly coupled.  This may need to be revisited in the future.
+
 
 ## Form structure definition
 

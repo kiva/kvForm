@@ -15,6 +15,30 @@ describe('kv.FormSet', function () {
 	});
 
 
+	it('is identifiable by a unique, internal id', function () {
+		expect(formSet._id).toBeDefined();
+	});
+
+
+	it('can be decorated', function () {
+		var myTestDecorator = {decProp1: 'one', decProp2: 'two'}
+
+		formSet.decorate('myTestDeocations', myTestDecorator);
+		expect(formSet.decProp1).toBe('one');
+		expect(formSet.decProp2).toBe('two');
+		expect(formSet.implements('myTestDeocations')).toBe(true);
+	});
+
+
+	it('sets the class, "clickableSet" on the .fSet parent of a checkbox or radio form element', function () {
+		var $radioSet = $('[type="radio"]', $form).closest('.fSet')
+		, radioFormSet = new kv.FormSet($radioSet);
+
+		expect(radioFormSet.$formSet.hasClass('clickableSet')).toBe(true);
+	});
+
+
+
 	// @todo move this to the validation module
 	xit('sets the class, "required", on all .fSet parents of a required form element', function () {
 		var $parentFSet = $('[required]', $form).closest('.fSet');
@@ -22,15 +46,6 @@ describe('kv.FormSet', function () {
 		$parentFSet.each(function () {
 			expect($(this).hasClass('required')).toBe(true);
 		});
-	});
-
-
-	it('sets the class, "clickableSet" on all .fSet parents of a checkbox or radio form element', function () {
-		// var $()
-
-		var $parentFSet = $('[type="radio"], [type="checkbox"]', $form).closest('.fSet');
-
-		expect($parentFSet.hasClass('clickableSet')).toBe(true);
 	});
 
 });

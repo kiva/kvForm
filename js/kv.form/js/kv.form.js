@@ -48,6 +48,9 @@
 			this.validate();
 		}
 
+		/** @todo **/
+		// Bind to validation events and update kv.Form accordingly
+
 		this.id = id++;
 		$.data($targetForm[0], 'kv-form', this);
 	};
@@ -58,6 +61,9 @@
 
 		/**
 		 * Initialize / process all the formSets in the form
+		 *
+		 * @sid - need help, I feel like this is a bad structure, but not sure if its worth putting a lot of effort into fixing
+		 * Any good alternatives?  Mainly, the problem is that this logic is too dependent on the kv.FormSet module and how it opperates
 		 */
 		initFormSets: function () {
 			var $fSets = $('.fSet, .fSetHead', this.$form)
@@ -72,16 +78,16 @@
 			$.each($fSets.get().reverse(), function (index, fSet) {
 				var $fSet = $(fSet)
 				, formSet = new kv.FormSet($fSet, this.settings)
-				, formSetName = formSet.$controlElement.attr('name');
+				, formSetName = formSet.name();
 
-				self.formSetsCollection[formSet.id] = formSet;
+				self.formSetsCollection[formSet._id] = formSet;
 
 				// Add to the formSetMap, one name to many ids.
 				if (formSetName) {
 					if (formSetMap[formSetName]) {
-						formSetMap[formSetName].push(formSet.id);
+						formSetMap[formSetName].push(formSet._id);
 					} else {
-						formSetMap[formSetName] = [formSet.id];
+						formSetMap[formSetName] = [formSet._id];
 					}
 				}
 			});

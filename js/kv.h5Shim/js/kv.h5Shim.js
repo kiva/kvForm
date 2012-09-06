@@ -22,7 +22,8 @@
 
 
 	/**
-	 * Given a jquery object, return a subset of its css properties as an object
+	 * Helper function.
+	 * Given a jquery object, process and return a subset of its css properties as an object
 	 *
 	 * @param $el
 	 */
@@ -49,7 +50,7 @@
 		};
 
 		// get the padding ( padding + border )
-		for ( s in padding ){
+		for (s in padding){
 			p = parseInt( $el.css('padding-' + s), 10);
 			b = parseInt( $el.css('border-' + s + '-width'), 10);
 
@@ -59,7 +60,7 @@
 		}
 
 		// get the margin
-		for ( s in margin ){
+		for (s in margin){
 			css['margin' + s] = $el.css('margin-' + s);
 		}
 
@@ -91,9 +92,9 @@
 
 			// Create the placeholder that will cover over the input element and delegate the click to the input
 			$placeholder
-				.css( css )
-				.text( text )
-				.click( function(){
+				.css(css)
+				.text(text)
+				.click(function(){
 					$this.focus();
 				});
 

@@ -32,7 +32,7 @@
 
 		$validationElements = $(validationFilter);
 		$validationElements.each(function (index, el) {
-				$(el).addClass('h5-' + $(el).attr('type'));
+			$(el).addClass('h5-' + $(el).attr('type'));
 		});
 
 
@@ -47,6 +47,9 @@
 		}
 	}
 
+	kv.validate = function ($form, optins) {
+
+	}
 
 
 }(jQuery, kv));
