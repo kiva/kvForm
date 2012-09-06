@@ -71,8 +71,7 @@
 			// jQuery does depth-first traversal, by reversing the order we can ensure the child/leaf nodes get processed before the parent nodes
 			$.each($fSets.get().reverse(), function (index, fSet) {
 				var $fSet = $(fSet)
-				, $controlElement = $('> input, > textarea', $fSet).first()
-				, formSet = new kv.FormSet($fSet, $controlElement, this.settings)
+				, formSet = new kv.FormSet($fSet, this.settings)
 				, formSetName = formSet.$controlElement.attr('name');
 
 				self.formSetsCollection[formSet.id] = formSet;
@@ -132,10 +131,7 @@
 		, attr: function (props, val) {
 			var k;
 
-			if (props instanceof jQuery) {
-				return props.attr(val);
-			}
-
+			// Set many
 			if (typeof props == 'object') {
 				for (k in props) {
 					this.attributes[k] = props[k];
@@ -144,12 +140,14 @@
 				return this;
 			}
 
-			if (typeof val != 'object' && val !== undefined) {
+			// Set one
+			else if (val !== undefined) {
 				this.attributes[props] = val;
 
 				return this;
 			}
 
+			// Get
 			return this.attributes[props];
 		}
 	};

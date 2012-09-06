@@ -28,17 +28,17 @@
 	}
 
 
-	kv.FormSet = function ($formSet, $controlElement, options) {
+	/**
+	 *
+	 * @param $formSet
+	 * @param options
+	 * @constructor
+	 */
+	kv.FormSet = function ($formSet, options) {
 		var $fSetHead = $('.fSetHead', $formSet)
+		, $controlElement = $('> input, > textarea', $formSet).first()
 		, controlType = $controlElement.attr('type');
 
-		/**
-		 * <div class="fSetHead">
-		 *     <div class="fSetInner">
-		 *         <div class="label">label</div>
-		 *      </div>
-		 * </div>
-		 */
 		if ($formSet.hasClass('fSetHead')) {
 			$formSet.html($fSetInner.clone().html($('<div class="label" />').html($formSet.text()))).addClass('fSet');
 		}
